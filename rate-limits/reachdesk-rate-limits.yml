@@ -1,0 +1,34 @@
+specificationVersion: '0.1'
+id: reachdesk-rate-limits
+name: Reachdesk API Rate Limits
+description: >-
+  Reachdesk does not publicly document specific API rate limits for its
+  Trigger Campaign API. Rate limit details are not included in the publicly
+  accessible support documentation. Customers should contact Reachdesk support
+  for plan-specific rate limit information and API usage quotas.
+url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+rateLimits:
+  - name: Trigger Campaign API
+    description: >-
+      Rate limits for the Trigger Campaign API (used to programmatically send
+      gifts) are not publicly documented. Limits likely vary by plan tier and
+      gift volume allocations (e.g., ~50/month on Core, ~100/month on Plus,
+      100+ on Premium). Exact per-second or per-minute request limits should
+      be confirmed with Reachdesk sales or support.
+    scope: account
+    documented: false
+    notes:
+      - No rate-limit response headers documented publicly
+      - Gift volume caps per month serve as a practical throughput limit
+      - Contact support@reachdesk.com for current rate limit policies
+authentication:
+  type: api-key
+  description: >-
+    API tokens are generated in the Reachdesk platform under
+    Organization > Settings > API Tokens > Add new. The token must be
+    included with each API request as a custom header for authentication.
+  tokenManagement: https://app.reachdesk.com (Organization Settings)
+notes:
+  - Rate limits are undocumented publicly as of 2026-06-13
+  - Practical throughput is constrained by monthly gift volume allocations per plan
+  - Pagination and webhook rate limits are also undocumented

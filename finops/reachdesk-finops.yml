@@ -1,0 +1,92 @@
+specificationVersion: '1.0'
+id: reachdesk-finops
+name: Reachdesk FinOps Profile
+description: >-
+  FinOps Framework 1.0 FOCUS-aligned profile for Reachdesk corporate gifting
+  platform costs. Reachdesk charges annual subscription fees for platform
+  access plus per-campaign or per-gift costs for physical goods and digital
+  rewards. Costs include platform license, gift inventory/sourcing, warehouse
+  fees, and shipping.
+url: https://www.reachdesk.com/pricing
+provider: Reachdesk
+framework: FinOps Framework 1.0
+focus: true
+costCategories:
+  - category: Platform License
+    description: >-
+      Annual subscription fee for Reachdesk platform access. Pricing is
+      custom-quoted starting at approximately $20,000/year. Platform fees
+      typically range from $4,000–$6,000+ per month on annual contract,
+      depending on user count, team count, and plan tier (Core, Plus, Premium).
+    billingModel: annual-subscription
+    estimatedRange:
+      minimum: 20000
+      currency: USD
+      period: annual
+    costDrivers:
+      - Number of users
+      - Number of teams
+      - Plan tier (Core / Plus / Premium)
+      - Number of warehouses
+      - Geographic regions enabled
+  - category: Gift & Merchandise Costs
+    description: >-
+      Per-gift costs for physical items sent through the platform. Pricing
+      varies by item type, value, and sourcing (marketplace vs. custom swag).
+      These are pass-through costs paid by the customer's gifting budget/wallet
+      loaded into the platform.
+    billingModel: per-unit
+    costDrivers:
+      - Gift type (physical, digital eGift, branded swag)
+      - Item value and sourcing
+      - Recipient country
+      - Quantity ordered
+  - category: Swag Sourcing
+    description: >-
+      Custom swag sourcing and production service available separately from
+      platform subscription. Minimum order value of $2,500. Includes design,
+      production, and inventory storage in Reachdesk warehouses.
+    billingModel: project-based
+    minimumOrder:
+      amount: 2500
+      currency: USD
+    costDrivers:
+      - Item type and quantity
+      - Customization complexity
+      - Warehouse storage duration
+  - category: Shipping & Fulfillment
+    description: >-
+      Costs for shipping physical gifts from Reachdesk warehouses to recipients.
+      Included in all plans for event fulfillment with 5-day domestic shipping
+      window. International shipping available on Plus and Premium plans.
+      Exact per-shipment costs are pass-through and depend on destination,
+      package weight, and service level.
+    billingModel: per-shipment
+    costDrivers:
+      - Destination country
+      - Package weight and dimensions
+      - Shipping speed (standard vs. expedited)
+      - Return handling (available in US, UK, EU)
+  - category: API Usage
+    description: >-
+      API usage for the Trigger Campaign API is included within the platform
+      subscription and constrained by the monthly gift volume allocation per
+      plan. No separate per-call API pricing is documented publicly.
+    billingModel: included-in-subscription
+    notes:
+      - No documented overage charges for API calls
+      - Gift volume caps (e.g., ~50/month Core, ~100/month Plus) serve as limits
+      - Enterprise/Premium tier has flexible volume; contact sales for details
+optimization:
+  recommendations:
+    - Monitor monthly gift send volume against plan tier caps to avoid unused capacity
+    - Consolidate team gifting under fewer teams to maximize plan efficiency
+    - Use Zapier or native CRM integrations to automate triggering and reduce manual overhead
+    - Evaluate ROI guarantee: Reachdesk offers 5x pipeline ROI in year one or money back
+    - Negotiate annual contract terms including volume and warehouse access upfront
+    - Pre-load gifting budget wallets to streamline approval workflows and reduce per-send friction
+notes:
+  - All prices are custom-quoted; figures here are publicly reported estimates
+  - Reachdesk does not publish a public rate card
+  - Gift budget wallets are pre-funded by the customer organization
+  - FinOps visibility requires exporting campaign and spend reports from the Reachdesk analytics dashboard

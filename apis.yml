@@ -1,0 +1,76 @@
+aid: reachdesk
+name: Reachdesk
+description: >-
+  Reachdesk is a global B2B corporate gifting and direct mail platform that
+  enables sales, marketing, and customer success teams to send physical gifts,
+  branded merchandise, and digital rewards at scale. The Reachdesk REST API
+  allows programmatic triggering of gift campaigns, integration with CRM and
+  marketing automation tools, and management of sending workflows across 180+
+  countries. API tokens are generated via the platform settings and used to
+  authenticate requests for campaign triggering and gift delivery operations.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/reachdesk/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Corporate Gifting
+  - Direct Mail
+  - Swag
+  - B2B
+  - Sales Enablement
+  - Customer Success
+  - Marketing Automation
+  - Gifting Platform
+  - Rewards
+apis:
+  - aid: reachdesk:reachdesk-api
+    name: Reachdesk API
+    description: >-
+      The Reachdesk REST API enables programmatic triggering of gift campaigns
+      and sending of physical gifts, branded merchandise, and digital rewards.
+      Authenticated via API tokens generated in the Reachdesk platform settings,
+      the API integrates with CRM and marketing automation workflows to automate
+      gifting as part of sales and customer success programs.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+    baseURL: https://app.reachdesk.com
+    tags:
+      - Gifts
+      - Campaigns
+      - Direct Mail
+      - Swag
+      - Rewards
+    properties:
+      - type: Documentation
+        url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+      - type: APISection
+        url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+common:
+  - type: Website
+    url: https://www.reachdesk.com/
+  - type: Documentation
+    url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  - type: Support
+    url: https://support.reachdesk.com/hc/en-gb
+  - type: Blog
+    url: https://www.reachdesk.com/blog
+  - type: Pricing
+    url: https://www.reachdesk.com/pricing
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/reachdesk
+  - type: X
+    url: https://x.com/ReachdeskHQ
+  - type: GitHubOrg
+    url: https://github.com/reachdesk
+  - type: Plans
+    url: plans/reachdesk-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/reachdesk-rate-limits.yml
+  - type: FinOps
+    url: finops/reachdesk-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

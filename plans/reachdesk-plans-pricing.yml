@@ -1,0 +1,84 @@
+specificationVersion: '0.1'
+id: reachdesk-plans-pricing
+name: Reachdesk Plans & Pricing
+description: >-
+  Reachdesk offers three annual subscription tiers for its corporate gifting
+  and swag platform. All plans require a minimum $20,000/year commitment and
+  are sold through direct sales with custom pricing. API access and advanced
+  integrations are available across all plans, with warehouse access and
+  regional reach scaling by tier.
+url: https://www.reachdesk.com/pricing
+plans:
+  - name: Core
+    description: >-
+      Entry-level plan for smaller teams exploring corporate gifting. Includes
+      access to one warehouse, one eGift region (Americas), and up to 5 users
+      across one team. Suitable for teams sending approximately 50 gifts per
+      month.
+    type: subscription
+    billing: annual
+    pricingModel: custom-quote
+    minimumAnnualCommitment: 20000
+    currency: USD
+    features:
+      - Up to 5 users
+      - 1 team
+      - ~50 gifts/month
+      - 1 warehouse (USA)
+      - 1 eGift region (Americas)
+      - GTM integrations (Salesforce, HubSpot, Marketo, Outreach, etc.)
+      - In-app landing pages
+      - Swag management
+      - Dedicated Customer Success Manager
+      - Dedicated onboarding
+      - Solution architect support
+      - Event fulfillment
+      - Creative services
+      - Reporting and analytics
+  - name: Plus
+    description: >-
+      Mid-tier plan for growing go-to-market teams. Adds a second warehouse and
+      EMEA eGift region support, expands user count to 10 across 2 teams, and
+      increases gift volume to approximately 100 gifts per month.
+    type: subscription
+    billing: annual
+    pricingModel: custom-quote
+    minimumAnnualCommitment: 20000
+    currency: USD
+    features:
+      - Up to 10 users
+      - 2 teams
+      - ~100 gifts/month
+      - 2 warehouses (USA + UK/Europe)
+      - 2 eGift regions (Americas + EMEA)
+      - All Core features
+      - Enhanced analytics
+      - Multi-team budget management
+  - name: Premium
+    description: >-
+      Top-tier plan for enterprise teams with global gifting needs. Includes
+      3 or more warehouses, international eGift support across all regions, 15+
+      users, and full API access for custom integrations and automation.
+    type: subscription
+    billing: annual
+    pricingModel: custom-quote
+    minimumAnnualCommitment: 20000
+    currency: USD
+    features:
+      - 15+ users
+      - Multiple teams
+      - 100+ gifts/month
+      - 3+ warehouses (USA, Canada, UK, Europe, Australia)
+      - International eGift regions (all 180+ countries)
+      - All Plus features
+      - Full API access (Trigger Campaign API)
+      - SCIM 2.0 user provisioning (enterprise tier)
+      - Advanced reporting and ROI tracking
+      - Dedicated solution architect
+      - SLA support
+notes:
+  - Pricing is custom-quoted; contact sales for exact costs
+  - Platform fees typically start at $4,000–$6,000+ per month on annual contract
+  - Swag sourcing is a separate offering with a $2,500 minimum order
+  - ROI guarantee of 5x pipeline generated in first year or money back
+  - API access for campaign triggering available; contact sales for details
