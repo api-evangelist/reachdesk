@@ -1,0 +1,132 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "reachdesk": "https://www.reachdesk.com/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "image": "schema:image",
+    "dateCreated": {"@id": "schema:dateCreated", "@type": "xsd:date"},
+    "dateModified": {"@id": "schema:dateModified", "@type": "xsd:date"},
+
+    "Organization": "schema:Organization",
+    "WebAPI": "schema:WebAPI",
+    "BlogPosting": "schema:BlogPosting",
+
+    "provider": "schema:provider",
+    "documentation": "schema:documentation",
+    "termsOfService": "schema:termsOfService",
+
+    "GiftCampaign": {
+      "@id": "reachdesk:GiftCampaign",
+      "@type": "@id"
+    },
+    "GiftSend": {
+      "@id": "reachdesk:GiftSend",
+      "@type": "@id"
+    },
+    "CampaignTrigger": {
+      "@id": "reachdesk:CampaignTrigger",
+      "@type": "@id"
+    },
+    "GiftType": {
+      "@id": "reachdesk:GiftType",
+      "@type": "@id"
+    },
+    "SendingWorkflow": {
+      "@id": "reachdesk:SendingWorkflow",
+      "@type": "@id"
+    },
+    "RecipientAddress": {
+      "@id": "reachdesk:RecipientAddress",
+      "@type": "@id"
+    },
+    "DeliveryStatus": {
+      "@id": "reachdesk:DeliveryStatus",
+      "@type": "@id"
+    },
+    "SwagItem": {
+      "@id": "reachdesk:SwagItem",
+      "@type": "@id"
+    },
+    "DigitalReward": {
+      "@id": "reachdesk:DigitalReward",
+      "@type": "@id"
+    },
+    "BrandedMerchandise": {
+      "@id": "reachdesk:BrandedMerchandise",
+      "@type": "@id"
+    },
+    "APIToken": {
+      "@id": "reachdesk:APIToken",
+      "@type": "@id"
+    },
+    "campaignId": {
+      "@id": "reachdesk:campaignId",
+      "@type": "xsd:string"
+    },
+    "recipientEmail": {
+      "@id": "reachdesk:recipientEmail",
+      "@type": "xsd:string"
+    },
+    "recipientName": {
+      "@id": "reachdesk:recipientName",
+      "@type": "xsd:string"
+    },
+    "giftValue": {
+      "@id": "reachdesk:giftValue",
+      "@type": "xsd:decimal"
+    },
+    "currency": {
+      "@id": "reachdesk:currency",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "reachdesk:country",
+      "@type": "xsd:string"
+    },
+    "deliveryCountry": {
+      "@id": "reachdesk:deliveryCountry",
+      "@type": "xsd:string"
+    },
+    "trackingUrl": {
+      "@id": "reachdesk:trackingUrl",
+      "@type": "xsd:anyURI"
+    },
+    "sendStatus": {
+      "@id": "reachdesk:sendStatus",
+      "@type": "xsd:string"
+    },
+    "crmIntegration": {
+      "@id": "reachdesk:crmIntegration",
+      "@type": "xsd:string"
+    },
+    "triggerEvent": {
+      "@id": "reachdesk:triggerEvent",
+      "@type": "xsd:string"
+    }
+  },
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.reachdesk.com/",
+      "name": "Reachdesk",
+      "description": "Global B2B corporate gifting and direct mail platform enabling sales, marketing, and customer success teams to send physical gifts, branded merchandise, and digital rewards at scale.",
+      "url": "https://www.reachdesk.com/"
+    },
+    {
+      "@type": "WebAPI",
+      "@id": "https://app.reachdesk.com/",
+      "name": "Reachdesk API",
+      "description": "REST API for programmatic triggering of gift campaigns, integration with CRM and marketing automation tools, and management of sending workflows across 180+ countries.",
+      "documentation": "https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API",
+      "provider": {
+        "@type": "Organization",
+        "@id": "https://www.reachdesk.com/"
+      }
+    }
+  ]
+}
