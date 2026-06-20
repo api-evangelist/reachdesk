@@ -9,7 +9,7 @@ description: >-
   countries. API tokens are generated via the platform settings and used to
   authenticate requests for campaign triggering and gift delivery operations.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: >-
   https://raw.githubusercontent.com/api-evangelist/reachdesk/refs/heads/main/apis.yml
 created: '2026-06-13'
@@ -34,7 +34,7 @@ apis:
       Authenticated via API tokens generated in the Reachdesk platform settings,
       the API integrates with CRM and marketing automation workflows to automate
       gifting as part of sales and customer success programs.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
     baseURL: https://app.reachdesk.com
     tags:
