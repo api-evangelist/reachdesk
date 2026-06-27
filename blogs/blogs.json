@@ -1,75 +1,14 @@
 {
-  "blogSource": "https://www.reachdesk.com/blog",
-  "lastFetched": "2026-06-13",
-  "posts": [
-    {
-      "title": "What is swag management software?",
-      "url": "https://www.reachdesk.com/blog/what-is-swag-management-software",
-      "date": "2026-06-11",
-      "description": "Swag management software helps companies store, send, automate, and track branded merchandise."
-    },
-    {
-      "title": "Salesforce customer success automation",
-      "url": "https://www.reachdesk.com/blog/salesforce-customer-success-automation-how-to-improve-saas-renewals-and-reduce-churn",
-      "date": "2026-06-10",
-      "description": "Explores how automation and gifting improve SaaS renewals, reduce customer attrition, and drive expansion."
-    },
-    {
-      "title": "Reachdesk's intelligent features guide",
-      "url": "https://www.reachdesk.com/blog/what-are-reachdesk-intelligent-features-a-complete-guide-to-ai-powered-corporate-gifting",
-      "date": "2026-05-19",
-      "description": "Explore Reachdesk intelligent gifting features, including AI personalization, global swag fulfillment, CRM automation, and measurable ROI."
-    },
-    {
-      "title": "What is personalized gift automation?",
-      "url": "https://www.reachdesk.com/blog/what-is-personalized-gift-automation",
-      "date": "2026-05-19",
-      "description": "Discusses how personalized automation drives pipeline and ROI through Salesforce integration."
-    },
-    {
-      "title": "Salesforce strategic gifting",
-      "url": "https://www.reachdesk.com/blog/how-sales-teams-accelerate-pipeline-with-salesforce-and-strategic-gifting",
-      "date": "2026-05-18",
-      "description": "Shows how sales teams leverage Salesforce data with strategic gifting to boost response rates and revenue."
-    },
-    {
-      "title": "Corporate gifting and swag platform",
-      "url": "https://www.reachdesk.com/blog/what-is-a-corporate-gifting-and-swag-platform",
-      "date": "2026-05-18",
-      "description": "Defines platform capabilities supporting global gifting, automation, and ROI measurement."
-    },
-    {
-      "title": "AI-Powered Event Engine",
-      "url": "https://www.reachdesk.com/blog/how-reachdesk-built-an-ai-powered-event-engine-that-drives-pipeline-without-even-needing-a-booth",
-      "date": "2026-05-08",
-      "description": "Details how AI, targeting, and onsite booking create scalable pipeline opportunities."
-    },
-    {
-      "title": "G2 Reviews Strategy",
-      "url": "https://www.reachdesk.com/blog/how-reachdesk-went-from-7-g2-reviews-to-107-in-one-quarter",
-      "date": "2026-04-24",
-      "description": "Physical gifts scaled reviews from 7 to 107 with replicable B2B strategy."
-    },
-    {
-      "title": "CRM-integrated gifting",
-      "url": "https://www.reachdesk.com/blog/crm-integrated-gifting-how-to-track-roi-from-automated-gifts",
-      "date": "2026-04-23",
-      "description": "Connects gifts to pipeline, revenue, and closed deals for measurable ROI tracking."
-    },
-    {
-      "title": "Global gift fulfillment",
-      "url": "https://www.reachdesk.com/blog/what-is-global-gift-fulfillment-how-enterprise-teams-ship-gifts-swag-and-event-kits-worldwide",
-      "date": "2026-04-21",
-      "description": "Enterprise teams manage worldwide gifting, swag, and event logistics at scale."
-    }
-  ],
   "repo": "reachdesk",
   "feeds": [
     {
-      "source": "https://support.reachdesk.com/hc/en-gb",
-      "error": "HTTPError"
+      "source": "https://www.reachdesk.com/blog",
+      "feed_url": "",
+      "saved": 0,
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T13:03:58Z",
+  "post_count": 1,
+  "agent_pulled": "2026-06-27"
 }
