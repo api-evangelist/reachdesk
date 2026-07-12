@@ -49,6 +49,8 @@ apis:
       - type: APISection
         url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
 common:
+  - type: DomainSecurity
+    url: security/reachdesk-domain-security.yml
   - type: Website
     url: https://www.reachdesk.com/
   - type: Documentation
