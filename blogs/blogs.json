@@ -2,13 +2,14 @@
   "repo": "reachdesk",
   "feeds": [
     {
-      "source": "https://www.reachdesk.com/blog",
-      "feed_url": "",
+      "source": "https://support.reachdesk.com/hc/en-gb",
+      "feed_url": "https://support.reachdesk.com/hc/en-gb",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
     }
   ],
-  "fetched": "2026-06-27T13:03:58Z",
-  "post_count": 1,
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 17,
   "agent_pulled": "2026-06-27"
 }
