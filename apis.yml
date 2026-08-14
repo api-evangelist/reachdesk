@@ -25,7 +25,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/reachdesk.
 url: >-
   https://raw.githubusercontent.com/api-evangelist/reachdesk/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 tags:
   - Corporate Gifting
@@ -37,6 +37,9 @@ tags:
   - Marketing Automation
   - Gifting Platform
   - Rewards
+  - MCP
+  - AI Agents
+  - OpenAPI
 apis:
   - aid: reachdesk:reachdesk-api
     name: Reachdesk API
@@ -45,10 +48,13 @@ apis:
       and sending of physical gifts, branded merchandise, and digital rewards.
       Authenticated via API tokens generated in the Reachdesk platform settings,
       the API integrates with CRM and marketing automation workflows to automate
-      gifting as part of sales and customer success programs.
+      gifting as part of sales and customer success programs. The contract is
+      published as OpenAPI 3.1 and declares 9 operations across sends, contacts,
+      transactions, organization and GDPR data-subject requests, based at
+      https://app.reachdesk.com/api/v2.
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
-    baseURL: https://app.reachdesk.com
+    baseURL: https://app.reachdesk.com/api/v2
     tags:
       - Gifts
       - Campaigns
@@ -56,11 +62,55 @@ apis:
       - Swag
       - Rewards
     properties:
+      - type: OpenAPI
+        url: openapi/reachdesk-api-openapi.yml
+      - type: Overlay
+        url: overlays/reachdesk-api-overlay.yaml
       - type: Documentation
         url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+      - type: APIReference
+        url: https://reachdesk.readme.io/reference/authentication
       - type: APISection
         url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+      - type: Authentication
+        url: authentication/reachdesk-authentication.yml
+      - type: ErrorCatalog
+        url: errors/reachdesk-problem-types.yml
+      - type: Conventions
+        url: conventions/reachdesk-conventions.yml
+      - type: DataModel
+        url: data-model/reachdesk-data-model.yml
+  - aid: reachdesk:reachdesk-mcp
+    name: Reachdesk MCP Server
+    description: >-
+      Reachdesk operates a first-party remote Model Context Protocol server at
+      https://app.reachdesk.com/mcp, on the same host as its REST API. It is a
+      hosted HTTP endpoint an MCP client POSTs to directly — there is no stdio
+      package to install. Access is OAuth 2.1 with dynamic client registration
+      (RFC 7591), PKCE S256, and two published scopes, mcp:tools.user.read and
+      mcp:tools.user.write, which scope tools to the authenticated Reachdesk user.
+      The server is undocumented in Reachdesk's knowledge base and API reference;
+      it was found by probing the API host, and the tool list is auth-gated.
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+    humanURL: https://reachdesk.readme.io/
+    baseURL: https://app.reachdesk.com/mcp
+    tags:
+      - MCP
+      - AI Agents
+      - Gifting
+      - OAuth
+    properties:
+      - type: MCPServer
+        url: mcp/reachdesk-mcp.yml
+      - type: ToolCrosswalk
+        url: mcp/reachdesk-tool-crosswalk.yml
+      - type: OAuthScopes
+        url: scopes/reachdesk-scopes.yml
+      - type: WellKnown
+        url: well-known/reachdesk-well-known.yml
 common:
+  - type: Authentication
+    url: authentication/reachdesk-authentication.yml
   - type: DomainSecurity
     url: security/reachdesk-domain-security.yml
   - type: Website
@@ -85,6 +135,55 @@ common:
     url: rate-limits/reachdesk-rate-limits.yml
   - type: FinOps
     url: finops/reachdesk-finops.yml
+  - type: DeveloperPortal
+    url: https://reachdesk.readme.io/
+  - type: APIReference
+    url: https://reachdesk.readme.io/reference/authentication
+  - type: GettingStarted
+    url: https://support.reachdesk.com/hc/en-gb/articles/29669486204305-Send-gifts-with-the-Reachdesk-Trigger-Campaign-API
+  - type: TermsOfService
+    url: https://www.reachdesk.com/terms-and-conditions
+  - type: PrivacyPolicy
+    url: https://www.reachdesk.com/privacy-policy
+  - type: Login
+    url: https://app.reachdesk.com/users/sign_in
+  - type: WellKnown
+    url: well-known/reachdesk-well-known.yml
+  - type: MCPServer
+    url: mcp/reachdesk-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/reachdesk-tool-crosswalk.yml
+  - type: OAuthScopes
+    url: scopes/reachdesk-scopes.yml
+  - type: Conventions
+    url: conventions/reachdesk-conventions.yml
+  - type: ErrorCatalog
+    url: errors/reachdesk-problem-types.yml
+  - type: DataModel
+    url: data-model/reachdesk-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/reachdesk-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/reachdesk-changelog.yml
+  - type: Conformance
+    url: conformance/reachdesk-conformance.yml
+  - type: TrustCenter
+    url: security/reachdesk-trust-center.yml
+  - type: Webhooks
+    url: asyncapi/reachdesk-webhooks.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Packages
+    url: packages/reachdesk-packages.yml
+  - type: LLMsTxt
+    url: llms/reachdesk-llms.txt
+  - type: Overlay
+    url: overlays/reachdesk-api-overlay.yaml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 26
+  pass: local-v1
