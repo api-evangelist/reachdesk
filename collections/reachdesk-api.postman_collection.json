@@ -1,0 +1,1761 @@
+{
+  "item": [
+    {
+      "id": "692bf842-11a2-418f-b5cb-be5174ddabb6",
+      "name": "Trigger Campaign",
+      "request": {
+        "name": "Trigger Campaign",
+        "description": {
+          "content": "Trigger a gift send from a campaign.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "campaigns",
+            ":id",
+            "trigger"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<integer>",
+              "key": "id",
+              "description": "(Required) ID of the campaign being triggered"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"request_id\": \"<string>\",\n  \"source\": \"<string>\",\n  \"recipient\": {\n    \"provider\": \"<string>\",\n    \"provider_contact_id\": \"<string>\",\n    \"provider_contact_type\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"street_address_1\": \"<string>\",\n    \"street_address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"role\": \"<string>\",\n    \"tax_id\": \"<string>\"\n  },\n  \"sender\": \"<string>\",\n  \"payment_currency\": \"<string>\",\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"approved\": \"<string>\",\n  \"payment_wallet_type\": \"User\",\n  \"team_name\": \"<string>\",\n  \"confirm_address\": true,\n  \"bundle_handwritten_note\": \"<string>\",\n  \"packaging_notes\": \"<string>\",\n  \"custom_attributes\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"send_method\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "f23b8ce8-13a5-4ebd-a7b6-e336d552eb29",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "campaigns",
+                ":id",
+                "trigger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the campaign being triggered"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request_id\": \"<string>\",\n  \"source\": \"<string>\",\n  \"recipient\": {\n    \"provider\": \"<string>\",\n    \"provider_contact_id\": \"<string>\",\n    \"provider_contact_type\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"street_address_1\": \"<string>\",\n    \"street_address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"role\": \"<string>\",\n    \"tax_id\": \"<string>\"\n  },\n  \"sender\": \"<string>\",\n  \"payment_currency\": \"<string>\",\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"approved\": \"<string>\",\n  \"payment_wallet_type\": \"User\",\n  \"team_name\": \"<string>\",\n  \"confirm_address\": true,\n  \"bundle_handwritten_note\": \"<string>\",\n  \"packaging_notes\": \"<string>\",\n  \"custom_attributes\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"send_method\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"id\\\": 55,\\n  \\\"type\\\": \\\"gift_card\\\",\\n  \\\"status\\\": \\\"processed\\\",\\n\\t\\\"payment_currency\\\": \\\"USD\\\",\\n\\t\\\"payment_wallet_id\\\": 1234,\\n\\t\\\"packaging_notes\\\": \\\"Handle with care\\\",\\n\\t\\\"custom_attributes\\\": [\\n    {\\n      \\\"name\\\": \\\"team\\\",\\n\\t\\t\\t\\\"value\\\": \\\"Polaris\\\"\\n\\t\\t}\\n  ],\\n\\t\\\"created_by_user\\\": {\\n    \\\"first_name\\\": \\\"Jane\\\",\\n    \\\"last_name\\\": \\\"Doe\\\",\\n    \\\"email\\\": \\\"jane.doe@reachdesk.com\\\"\\n  },\\n\\t\\\"claim_url\\\": null,\\n  \\\"recipient\\\": {\\n    \\\"first_name\\\": \\\"John\\\",\\n    \\\"last_name\\\": \\\"Doe\\\",\\n    \\\"email\\\": \\\"john.doe@example.com\\\",\\n    \\\"company_name\\\": \\\"Example Ltd.\\\",\\n\\t\\t\\\"phone_number\\\": \\\"+1 123 123 123\\\",\\n    \\\"street_address_1\\\": \\\"45 Rockefeller Plaza\\\",\\n    \\\"street_address_2\\\": \\\"5th Floor\\\",\\n    \\\"city\\\": \\\"New York\\\",\\n    \\\"state\\\": \\\"NY\\\",\\n    \\\"zipcode\\\": \\\"10111\\\",\\n    \\\"country\\\": \\\"US\\\",\\n\\t\\t\\\"tax_id\\\": \\\"123456789\\\"\\n  },\\n  \\\"sender\\\": {\\n    \\\"first_name\\\": \\\"Jane\\\",\\n    \\\"last_name\\\": \\\"Doe\\\",\\n    \\\"email\\\": \\\"jane.doe@reachdesk.com\\\"\\n  },\\n  \\\"gift_card\\\": {\\n    \\\"amount\\\": 15.0,\\n    \\\"currency\\\": \\\"USD\\\"\\n  }\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "823c3dbb-f2d8-496c-be30-025d9ae18794",
+      "name": "Get Organization",
+      "request": {
+        "name": "Get Organization",
+        "description": {
+          "content": "Retrieve the basic information about the Organization associated to the given API Token.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "organization"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "1c75a20d-9903-4f73-8600-270af3bc9d1a",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "organization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"id\\\": \\\"570\\\",\\n  \\\"name\\\": \\\"Acne Inc.\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "4866a935-9e9f-4bcf-9255-29f8cb6159ed",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "organization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "482d9a48-4e10-42ea-959a-88961f90d99f",
+      "name": "Create GDPR Request",
+      "request": {
+        "name": "Create GDPR Request",
+        "description": {
+          "content": "Create a GDPR Request for erasing or exporting subject data.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "gdpr",
+            "requests"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"request\": {\n    \"request_type\": \"<string>\",\n    \"subject\": \"<string>\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "f9350335-bb67-450a-93c6-8403c00a5ef8",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "gdpr",
+                "requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request\": {\n    \"request_type\": \"<string>\",\n    \"subject\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"id\\\": 1,\\n  \\\"request_type\\\": \\\"erase_subject\\\",\\n  \\\"status\\\": \\\"pending\\\",\\n  \\\"subject\\\": \\\"john.doe@mail.com\\\",\\n  \\\"created_at\\\": \\\"2023-06-09T17:53\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "8f4e24b2-be99-425b-b16d-6a02dffb3bc0",
+      "name": "Get GDPR Request",
+      "request": {
+        "name": "Get GDPR Request",
+        "description": {
+          "content": "Get the information and status about an existing GDPR Request (Coming Soon)",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "gdpr",
+            "requests",
+            ":id"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<integer>",
+              "key": "id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "983803a3-1d07-4cb5-b462-5d3cee92965a",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "gdpr",
+                "requests",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"id\\\": 1,\\n  \\\"request_type\\\": \\\"erase_subject\\\",\\n  \\\"status\\\": \\\"pending\\\",\\n  \\\"subject\\\": \\\"john.doe@mail.com\\\",\\n  \\\"created_at\\\": \\\"2023-06-09T17:53\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "92aa9b9c-cd73-483c-8de8-f3baffdb9001",
+      "name": "List Contacts",
+      "request": {
+        "name": "List Contacts",
+        "description": {
+          "content": "Get a list of contacts within your organization.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "contacts"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "account_name",
+              "value": "<string>",
+              "description": "Filter results by contact's company name"
+            },
+            {
+              "disabled": false,
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "disabled": false,
+              "key": "per_page",
+              "value": "25"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "9d0f3902-c829-4a7f-8b2a-255007827f4e",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "account_name",
+                  "value": "<string>"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "25"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n\\t\\\"data\\\": [\\n\\t\\t{\\n\\t\\t\\t\\\"id\\\": 86,\\n\\t\\t\\t\\\"name\\\": \\\"Ashley Eapen\\\",\\n\\t\\t\\t\\\"first_name\\\": \\\"Ashley\\\",\\n\\t\\t\\t\\\"last_name\\\": \\\"Eapen\\\",\\n\\t\\t\\t\\\"email\\\": \\\"ashley.eapen@reachdesk.com\\\",\\n\\t\\t\\t\\\"job_title\\\": \\\"Account Executive\\\",\\n\\t\\t\\t\\\"account_name\\\": \\\"Reachdesk\\\",\\n\\t\\t\\t\\\"country\\\": \\\"United States\\\"\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\t\\\"id\\\": 80,\\n\\t\\t\\t\\\"name\\\": \\\"Bill Costello\\\",\\n\\t\\t\\t\\\"first_name\\\": \\\"Bill\\\",\\n\\t\\t\\t\\\"last_name\\\": \\\"Costello\\\",\\n\\t\\t\\t\\\"email\\\": \\\"billy.costello@reachdesk.com\\\",\\n\\t\\t\\t\\\"job_title\\\": \\\"Associate Account Executive\\\",\\n\\t\\t\\t\\\"account_name\\\": \\\"Reachdesk\\\",\\n\\t\\t\\t\\\"country\\\": \\\"United Kingdom\\\"\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\t\\\"id\\\": 20,\\n\\t\\t\\t\\\"name\\\": \\\"Jeffrey Vanzant\\\",\\n\\t\\t\\t\\\"first_name\\\": \\\"Jeffrey\\\",\\n\\t\\t\\t\\\"last_name\\\": \\\"Vanzant\\\",\\n\\t\\t\\t\\\"email\\\": \\\"jeffrey.vanzant@reachdesk.com\\\",\\n\\t\\t\\t\\\"job_title\\\": \\\"Senior Manager, Revenue Operations\\\",\\n\\t\\t\\t\\\"account_name\\\": \\\"Reachdesk\\\",\\n\\t\\t\\t\\\"country\\\": \\\"Portugal\\\"\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\t\\\"id\\\": 11,\\n\\t\\t\\t\\\"name\\\": \\\"Katherine Clementi\\\",\\n\\t\\t\\t\\\"first_name\\\": \\\"Katherine\\\",\\n\\t\\t\\t\\\"last_name\\\": \\\"Clementi\\\",\\n\\t\\t\\t\\\"email\\\": \\\"katherine.clementi@reachdesk.com\\\",\\n\\t\\t\\t\\\"job_title\\\": \\\"Customer Success Manager\\\",\\n\\t\\t\\t\\\"account_name\\\": \\\"reachdesk\\\",\\n\\t\\t\\t\\\"country\\\": \\\"Brazil\\\"\\n\\t\\t}\\n\\t],\\n\\t\\\"pagination\\\": {\\n\\t\\t\\\"page\\\": 1,\\n\\t\\t\\\"per_page\\\": 25,\\n\\t\\t\\\"total_pages\\\": 1,\\n\\t\\t\\\"total_records\\\": 4\\n\\t}\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "e07242cb-2226-40e4-be95-425a47705b6d",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "account_name",
+                  "value": "<string>"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "25"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "e015d665-210e-4297-a322-749e47187943",
+      "name": "List Sends",
+      "request": {
+        "name": "List Sends",
+        "description": {
+          "content": "Get a list of Sends within your Organization",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "sends"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "key": "start_date",
+              "value": "{{start_date}}"
+            },
+            {
+              "key": "end_date",
+              "value": "{{end_date}}"
+            },
+            {
+              "disabled": false,
+              "key": "start_date",
+              "value": "<date>",
+              "description": "Filter sends from the given date onwards. Format: YYYY-MM-DD (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "end_date",
+              "value": "<date>",
+              "description": "Return sends created before the given date. Format: YYYY-MM-DD (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "page",
+              "value": "1",
+              "description": "Pagination value"
+            },
+            {
+              "disabled": false,
+              "key": "per_page",
+              "value": "25",
+              "description": "number of results per page"
+            },
+            {
+              "disabled": false,
+              "key": "start_updated_date",
+              "value": "<date>",
+              "description": "Filter sends from first update date (depends on end_updated_date). Format: YYYY-MM-DD (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "end_updated_date",
+              "value": "<date>",
+              "description": "Filter sends from the last update date (Depends on start_updated_date). Format: YYYY-MM-DD (optional)"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "8878a5bb-e095-4a9f-baf8-c455fd73210d",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "sends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "end_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "25"
+                },
+                {
+                  "key": "start_updated_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "end_updated_date",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"data\\\": [\\n    \\n    {\\n      \\\"id\\\": 4,\\n      \\\"type\\\": \\\"bundle\\\",\\n      \\\"email\\\": \\\"uilton.jose@gmail.com\\\",\\n      \\\"status\\\": \\\"pending\\\",\\n      \\\"latest_action\\\": null,\\n      \\\"processed_at\\\": null,\\n      \\\"created_at\\\": \\\"2025-08-06T16:56:11.364Z\\\",\\n      \\\"gift_name\\\": null,\\n      \\\"send_updated_date\\\": \\\"2025-08-06T16:56:11.364Z\\\",\\n      \\\"campaign\\\": {\\n        \\\"id\\\": 12,\\n        \\\"name\\\": \\\"Badjurance\\\"\\n      },\\n      \\\"cost\\\": {\\n        \\\"amount\\\": 3.73,\\n        \\\"original_amount\\\": 3.0,\\n        \\\"currency\\\": \\\"USD\\\",\\n        \\\"original_currency\\\": \\\"GBP\\\",\\n        \\\"display\\\": \\\"3.73 USD\\\",\\n        \\\"original_display\\\": \\\"3.00 GBP\\\",\\n        \\\"state\\\": \\\"estimated\\\"\\n      },\\n      \\\"team_name\\\": null,\\n      \\\"order\\\": {\\n        \\\"id\\\": 123,\\n        \\\"order_number\\\": \\\"1234567890\\\",\\n        \\\"status\\\": 350,\\n        \\\"shipped_at\\\": \\\"2025-12-22T11:38:20.944Z\\\",\\n        \\\"tracking_code\\\": \\\"1234567890\\\",\\n        \\\"tracking_url\\\": \\\"https://www.google.com\\\",\\n        \\\"shipment\\\": {\\n          \\\"id\\\": 123,\\n          \\\"provider_id\\\": 123,\\n          \\\"provider_sub_status_message\\\": \\\"Sub status message\\\",\\n          \\\"courier\\\": \\\"courier\\\",\\n          \\\"tracking_number\\\": \\\"1234567890\\\",\\n          \\\"tracking_url\\\": \\\"https://www.google.com\\\"\\n        }\\n      },\\n      \\\"total_items_cost\\\": 100.0,\\n      \\\"engage_items\\\": [\\n        {\\n          \\\"name\\\": \\\"My Cuppa\\\",\\n          \\\"quantity\\\": 1\\n        },\\n        {\\n          \\\"name\\\": \\\"Chocolate box\\\",\\n          \\\"quantity\\\": 1\\n        }\\n      ]\\n    }\\n  ],\\n  \\\"pagination\\\": {\\n    \\\"page\\\": 1,\\n    \\\"per_page\\\": 25,\\n    \\\"total_pages\\\": 1,\\n    \\\"total_records\\\": 4\\n  }\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "62ba3589-5355-437d-95da-c125147f6ddb",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "sends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "end_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "25"
+                },
+                {
+                  "key": "start_updated_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "end_updated_date",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "0c8e005c-32d0-4363-8f26-007a63ec6218",
+          "name": "401",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "sends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "end_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "25"
+                },
+                {
+                  "key": "start_updated_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "end_updated_date",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "ee07ccec-3dc8-4808-8e17-efac84570ba7",
+      "name": "List Transactions",
+      "request": {
+        "name": "List Transactions",
+        "description": {
+          "content": "Get a list of transactions within your organization.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "transactions"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "start_date",
+              "value": "<date>",
+              "description": "Filter transactions created from start date"
+            },
+            {
+              "disabled": false,
+              "key": "end_date",
+              "value": "<date>",
+              "description": "Filter transactions created until end date"
+            },
+            {
+              "disabled": false,
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "disabled": false,
+              "key": "transaction_types[]",
+              "value": "<string>",
+              "description": "Filter by transaction types. Available values: balance_allocation, balance_top_up, campaign_sends, contracted_free_credit, contracted_paid_credit, currency_conversion, free_credit, other, refund, sourced_items, upfront_balance_top_up, warehouse_sends, store_portal"
+            },
+            {
+              "disabled": false,
+              "key": "transaction_types[]",
+              "value": "<string>",
+              "description": "Filter by transaction types. Available values: balance_allocation, balance_top_up, campaign_sends, contracted_free_credit, contracted_paid_credit, currency_conversion, free_credit, other, refund, sourced_items, upfront_balance_top_up, warehouse_sends, store_portal"
+            },
+            {
+              "disabled": false,
+              "key": "states[]",
+              "value": "<string>",
+              "description": "Filter by transaction state. Available values: cancelled, pending, processed."
+            },
+            {
+              "disabled": false,
+              "key": "states[]",
+              "value": "<string>",
+              "description": "Filter by transaction state. Available values: cancelled, pending, processed."
+            },
+            {
+              "disabled": false,
+              "key": "currencies[]",
+              "value": "<string>",
+              "description": "Filter by transaction currency. Use ISO 4217 (3-letter). Available values: AUD, CAD, DKK, EUR, GBP, INR, NOK, SEK, USD"
+            },
+            {
+              "disabled": false,
+              "key": "currencies[]",
+              "value": "<string>",
+              "description": "Filter by transaction currency. Use ISO 4217 (3-letter). Available values: AUD, CAD, DKK, EUR, GBP, INR, NOK, SEK, USD"
+            },
+            {
+              "disabled": false,
+              "key": "campaign_types[]",
+              "value": "<string>",
+              "description": "Filter by campaign types. Available values: bundle, gift_card, marketplace, note"
+            },
+            {
+              "disabled": false,
+              "key": "campaign_types[]",
+              "value": "<string>",
+              "description": "Filter by campaign types. Available values: bundle, gift_card, marketplace, note"
+            },
+            {
+              "disabled": false,
+              "key": "team_ids[]",
+              "value": "<integer>",
+              "description": "Filter transactions by users within given teams."
+            },
+            {
+              "disabled": false,
+              "key": "team_ids[]",
+              "value": "<integer>",
+              "description": "Filter transactions by users within given teams."
+            },
+            {
+              "disabled": false,
+              "key": "user_ids[]",
+              "value": "<integer>",
+              "description": "Filter transactions by the users associated."
+            },
+            {
+              "disabled": false,
+              "key": "user_ids[]",
+              "value": "<integer>",
+              "description": "Filter transactions by the users associated."
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "f08e7cb9-8f69-4cae-bfc7-423134bc5772",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "end_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "transaction_types[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "transaction_types[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "states[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "states[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "currencies[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "currencies[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "campaign_types[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "campaign_types[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "team_ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "team_ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "user_ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "user_ids[]",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"data\\\": [\\n    {\\n      \\\"id\\\": 137,\\n      \\\"transaction_type\\\": \\\"other\\\",\\n      \\\"state\\\": \\\"pending\\\",\\n      \\\"currency\\\": \\\"EUR\\\",\\n      \\\"amount\\\": -20,\\n      \\\"send\\\": {\\n        \\\"id\\\": 221,\\n        \\\"recipient_email\\\": \\\"recipient@email.com\\\",\\n        \\\"campaign_name\\\": \\\"Campaign name\\\",\\n        \\\"team_name\\\": \\\"Team name\\\"\\n      },\\n      \\\"stock_shipment_order_number\\\": null,\\n      \\\"merchandise_order_number\\\": null,\\n      \\\"reference\\\": \\\"Campaign name\\\",\\n      \\\"source_wallet_name\\\": \\\"Georgia people 918 EUR\\\",\\n      \\\"destination_wallet_name\\\": null,\\n      \\\"created_by\\\": {\\n        \\\"name\\\": \\\"Margret Bechtelar\\\",\\n        \\\"email\\\": \\\"lyla@larson.example\\\"\\n      },\\n      \\\"state_updated_at\\\": null,\\n      \\\"created_at\\\": \\\"2023-09-13T18:14:10.000Z\\\",\\n      \\\"updated_at\\\": \\\"2023-09-13T18:14:10.000Z\\\"\\n    }\\n  ],\\n  \\\"pagination\\\": {\\n    \\\"page\\\": 1,\\n    \\\"per_page\\\": 200,\\n    \\\"total_pages\\\": 1,\\n    \\\"total_records\\\": 1\\n  }\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "5456908c-fa31-4a79-9520-f00e75e7af88",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "end_date",
+                  "value": "<date>"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "transaction_types[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "transaction_types[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "states[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "states[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "currencies[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "currencies[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "campaign_types[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "campaign_types[]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "team_ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "team_ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "user_ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "user_ids[]",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "dc7a68c1-653a-4615-97ff-630ffadd04fc",
+      "name": "Get Send",
+      "request": {
+        "name": "Get Send",
+        "description": {
+          "content": "Retrieves a single send",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "sends",
+            ":id"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<integer>",
+              "key": "id",
+              "description": "(Required) Unique identifier of the send"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "45866656-48a7-4d53-8f3d-59783338dfc9",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "sends",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the send"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"data\\\": {\\n    \\\"id\\\": 12345,\\n    \\\"type\\\": \\\"bundle\\\",\\n    \\\"email\\\": \\\"recipient@example.com\\\",\\n    \\\"status\\\": \\\"processed\\\",\\n    \\\"latest_action\\\": null,\\n    \\\"processed_at\\\": \\\"2024-03-03T12:35:00.000Z\\\",\\n    \\\"created_at\\\": \\\"2024-03-01T09:00:00.000Z\\\",\\n    \\\"send_updated_date\\\": \\\"2024-03-03T12:35:00.000Z\\\",\\n    \\\"gift_name\\\": null,\\n    \\\"campaign\\\": {\\n      \\\"id\\\": 678,\\n      \\\"name\\\": \\\"Q1 Prospecting\\\"\\n    },\\n    \\\"cost\\\": {\\n      \\\"amount\\\": 6.5,\\n      \\\"original_amount\\\": 6.5,\\n      \\\"currency\\\": \\\"GBP\\\",\\n      \\\"original_currency\\\": \\\"GBP\\\",\\n      \\\"display\\\": \\\"6.50 GBP\\\",\\n      \\\"original_display\\\": \\\"6.50 GBP\\\",\\n      \\\"state\\\": \\\"processed\\\"\\n    },\\n    \\\"team_name\\\": null,\\n    \\\"order\\\": {\\n      \\\"id\\\": 987,\\n      \\\"order_number\\\": \\\"RD-000987\\\",\\n      \\\"tracking_code\\\": \\\"1234\\\",\\n      \\\"tracking_url\\\": \\\"https://shipments.reachdesk.com/1234\\\",\\n      \\\"status\\\": 350,\\n      \\\"shipped_at\\\": \\\"2024-03-02T10:05:00.000Z\\\",\\n      \\\"shipment\\\": {\\n        \\\"id\\\": 456,\\n        \\\"provider_id\\\": \\\"prov_123\\\",\\n        \\\"provider_sub_status_message\\\": \\\"In transit\\\",\\n        \\\"courier\\\": \\\"dhl\\\",\\n        \\\"tracking_number\\\": \\\"1234\\\",\\n        \\\"tracking_url\\\": \\\"https://shipments.reachdesk.com/1234\\\"\\n      }\\n    },\\n    \\\"total_items_cost\\\": \\\"70.0\\\",\\n    \\\"engage_items\\\": [\\n      {\\n        \\\"name\\\": \\\"Branded Hoodie\\\",\\n        \\\"quantity\\\": 1\\n      },\\n      {\\n        \\\"name\\\": \\\"Reusable Bottle\\\",\\n        \\\"quantity\\\": 7\\n      }\\n    ]\\n  }\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "09f64068-5d88-4f78-a020-2147fea2b5a0",
+          "name": "401",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "sends",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the send"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "3c77c7dc-1b4b-47c4-b697-de33383219e3",
+          "name": "404",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "sends",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the send"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"error\\\": \\\"Send not found\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "3a2a5b09-ed1f-4f02-a889-88e8532e950b",
+      "name": "Bulk Send",
+      "request": {
+        "name": "Bulk Send",
+        "description": {
+          "content": "Trigger a gift send from a campaign to many recipients in a single request.  This is the bulk counterpart to Trigger Campaign. Instead of one recipient per call, you send a list of recipients and the request is processed asynchronously: the endpoint responds immediately with a bulk send `id`, and the individual gifts are created in the background. As with the single trigger, each gift is built from the campaign's own configuration — you don't send the gift-card amount, bundle items, note template, or marketplace product. You only provide the recipients and the sender; everything else comes from the campaign. It works for every campaign type (gift card, note, bundle, marketplace).",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "bulk_sends"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"request_id\": \"<string>\",\n  \"campaign_id\": \"<integer>\",\n  \"sender\": \"<string>\",\n  \"recipients\": {\n    \"provider\": \"<string>\",\n    \"provider_contact_id\": \"<string>\",\n    \"provider_contact_type\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"street_address_1\": \"<string>\",\n    \"street_address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"role\": \"<string>\",\n    \"tax_id\": \"<string>\"\n  },\n  \"payment_currency\": \"<string>\",\n  \"payment_wallet_type\": \"User\",\n  \"team_name\": \"<string>\",\n  \"send_method\": \"email\",\n  \"confirm_address\": \"<boolean>\",\n  \"packaging_notes\": \"<string>\",\n  \"bundle_handwritten_note\": \"<string>\",\n  \"custom_attributes\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "5b25a3d7-5d31-4409-b636-0d12b1f380d6",
+          "name": "202",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "bulk_sends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request_id\": \"<string>\",\n  \"campaign_id\": \"<integer>\",\n  \"sender\": \"<string>\",\n  \"recipients\": {\n    \"provider\": \"<string>\",\n    \"provider_contact_id\": \"<string>\",\n    \"provider_contact_type\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"street_address_1\": \"<string>\",\n    \"street_address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"role\": \"<string>\",\n    \"tax_id\": \"<string>\"\n  },\n  \"payment_currency\": \"<string>\",\n  \"payment_wallet_type\": \"User\",\n  \"team_name\": \"<string>\",\n  \"send_method\": \"email\",\n  \"confirm_address\": \"<boolean>\",\n  \"packaging_notes\": \"<string>\",\n  \"bundle_handwritten_note\": \"<string>\",\n  \"custom_attributes\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Accepted",
+          "code": 202,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"id\\\": 98123\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "30011178-5ce5-49ff-bd4f-b2ec28f93ae3",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "bulk_sends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request_id\": \"<string>\",\n  \"campaign_id\": \"<integer>\",\n  \"sender\": \"<string>\",\n  \"recipients\": {\n    \"provider\": \"<string>\",\n    \"provider_contact_id\": \"<string>\",\n    \"provider_contact_type\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"street_address_1\": \"<string>\",\n    \"street_address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"role\": \"<string>\",\n    \"tax_id\": \"<string>\"\n  },\n  \"payment_currency\": \"<string>\",\n  \"payment_wallet_type\": \"User\",\n  \"team_name\": \"<string>\",\n  \"send_method\": \"email\",\n  \"confirm_address\": \"<boolean>\",\n  \"packaging_notes\": \"<string>\",\n  \"bundle_handwritten_note\": \"<string>\",\n  \"custom_attributes\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"message\\\": \\\"Parameter \\\\\\\"send_method\\\\\\\" must be \\\\\\\"link\\\\\\\" or \\\\\\\"email\\\\\\\"\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "b9ee81aa-6fb8-4c8c-9b14-67edf8477bee",
+          "name": "401",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "bulk_sends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request_id\": \"<string>\",\n  \"campaign_id\": \"<integer>\",\n  \"sender\": \"<string>\",\n  \"recipients\": {\n    \"provider\": \"<string>\",\n    \"provider_contact_id\": \"<string>\",\n    \"provider_contact_type\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"street_address_1\": \"<string>\",\n    \"street_address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"role\": \"<string>\",\n    \"tax_id\": \"<string>\"\n  },\n  \"payment_currency\": \"<string>\",\n  \"payment_wallet_type\": \"User\",\n  \"team_name\": \"<string>\",\n  \"send_method\": \"email\",\n  \"confirm_address\": \"<boolean>\",\n  \"packaging_notes\": \"<string>\",\n  \"bundle_handwritten_note\": \"<string>\",\n  \"custom_attributes\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "f7d31ce8-fb27-429f-88b7-f4e828fb59f4",
+          "name": "404",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "bulk_sends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request_id\": \"<string>\",\n  \"campaign_id\": \"<integer>\",\n  \"sender\": \"<string>\",\n  \"recipients\": {\n    \"provider\": \"<string>\",\n    \"provider_contact_id\": \"<string>\",\n    \"provider_contact_type\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"street_address_1\": \"<string>\",\n    \"street_address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"role\": \"<string>\",\n    \"tax_id\": \"<string>\"\n  },\n  \"payment_currency\": \"<string>\",\n  \"payment_wallet_type\": \"User\",\n  \"team_name\": \"<string>\",\n  \"send_method\": \"email\",\n  \"confirm_address\": \"<boolean>\",\n  \"packaging_notes\": \"<string>\",\n  \"bundle_handwritten_note\": \"<string>\",\n  \"custom_attributes\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "{\n  \"message\": \"This campaign does not exist\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "b4892dac-fa6f-4ada-aac4-c638dffd5141",
+          "name": "422",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "bulk_sends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request_id\": \"<string>\",\n  \"campaign_id\": \"<integer>\",\n  \"sender\": \"<string>\",\n  \"recipients\": {\n    \"provider\": \"<string>\",\n    \"provider_contact_id\": \"<string>\",\n    \"provider_contact_type\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"street_address_1\": \"<string>\",\n    \"street_address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"role\": \"<string>\",\n    \"tax_id\": \"<string>\"\n  },\n  \"payment_currency\": \"<string>\",\n  \"payment_wallet_type\": \"User\",\n  \"team_name\": \"<string>\",\n  \"send_method\": \"email\",\n  \"confirm_address\": \"<boolean>\",\n  \"packaging_notes\": \"<string>\",\n  \"bundle_handwritten_note\": \"<string>\",\n  \"custom_attributes\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "{\n  \"message\": \"This campaign is not active\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.reachdesk.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "387f0c7b-524f-46a7-8e7b-af0b3549dbc3",
+    "name": "Reachdesk API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

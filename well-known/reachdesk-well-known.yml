@@ -1,0 +1,163 @@
+generated: '2026-08-13'
+method: probed
+source: live GET probes of every apis.yml baseURL host, the OpenAPI servers[] host, and the docs host
+description: >-
+  Well-known URI probe for Reachdesk. Two real documents are served on the API
+  host (app.reachdesk.com): RFC 8414 OAuth 2.0 Authorization Server Metadata and
+  RFC 9728 OAuth 2.0 Protected Resource Metadata. Both exist to support the
+  Reachdesk remote MCP server at https://app.reachdesk.com/mcp — the protected
+  resource metadata is the exact document named in the WWW-Authenticate challenge
+  that endpoint returns. No security.txt, no OpenID Connect discovery document,
+  no api-catalog, and no A2A agent card are served on any Reachdesk host.
+hosts:
+  - host: app.reachdesk.com
+    role: API host (OpenAPI servers[] host, MCP endpoint host)
+    paths:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        document: true
+        file: well-known/reachdesk-oauth-authorization-server.json
+        note: >-
+          RFC 8414 metadata. issuer https://app.reachdesk.com, PKCE S256 only,
+          dynamic client registration endpoint present, scopes_supported are the
+          two MCP tool scopes.
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        content_type: application/json
+        document: true
+        file: well-known/reachdesk-oauth-protected-resource.json
+        note: >-
+          RFC 9728 metadata. Referenced by resource_metadata= in the
+          WWW-Authenticate: Bearer realm="MCP" challenge on POST /mcp.
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: text/html
+        document: false
+        note: >-
+          NOT a document. Returns the Reachdesk application HTML shell, not an
+          OIDC discovery document. Treated as a miss.
+      - path: /.well-known/api-catalog
+        status: 200
+        content_type: text/html
+        document: false
+        note: NOT a document. Application HTML shell. Treated as a miss.
+      - path: /.well-known/security.txt
+        status: 401
+        document: false
+        note: Redirected into the authenticated application; no RFC 9116 file served.
+      - path: /.well-known/agent-card.json
+        status: 401
+        document: false
+      - path: /.well-known/agent.json
+        status: 401
+        document: false
+      - path: /.well-known/ai-plugin.json
+        status: 401
+        document: false
+  - host: api.reachdesk.com
+    role: alias host (CNAME to the same CloudFront distribution as app.reachdesk.com)
+    paths:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        document: true
+        note: >-
+          Same document as app.reachdesk.com but with issuer
+          https://api.reachdesk.com. Not saved separately — api.reachdesk.com is
+          an alias of the same application and the docs name app.reachdesk.com
+          as the API host.
+      - path: /.well-known/security.txt
+        status: 401
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 401
+        document: false
+      - path: /.well-known/agent.json
+        status: 401
+        document: false
+  - host: www.reachdesk.com
+    role: marketing site (Webflow)
+    paths:
+      - path: /.well-known/security.txt
+        status: 404
+        document: false
+      - path: /.well-known/openid-configuration
+        status: 404
+        document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        document: false
+      - path: /.well-known/api-catalog
+        status: 404
+        document: false
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        document: false
+      - path: /.well-known/agent.json
+        status: 404
+        document: false
+      - path: /llms.txt
+        status: 200
+        content_type: text/plain
+        document: true
+        file: llms/reachdesk-llms.txt
+  - host: support.reachdesk.com
+    role: knowledge base (Zendesk Guide)
+    paths:
+      - path: /.well-known/security.txt
+        status: 404
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        document: false
+      - path: /.well-known/agent.json
+        status: 404
+        document: false
+      - path: /.well-known/api-catalog
+        status: 404
+        document: false
+  - host: reachdesk.readme.io
+    role: API reference / developer portal (ReadMe)
+    paths:
+      - path: /.well-known/security.txt
+        status: 404
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        document: false
+      - path: /.well-known/agent.json
+        status: 404
+        document: false
+      - path: /.well-known/api-catalog
+        status: 404
+        document: false
+      - path: /llms.txt
+        status: 200
+        content_type: text/plain
+        document: true
+        file: llms/reachdesk-docs-llms.txt
+summary:
+  documents_found: 2
+  security_txt: false
+  openid_configuration: false
+  oauth_authorization_server: true
+  oauth_protected_resource: true
+  api_catalog: false
+  agent_card: false
+  ai_plugin: false
+notes:
+  - >-
+    A 200 that returns the application HTML shell is recorded as document:false.
+    app.reachdesk.com answers 200 with HTML for several /.well-known/* paths it
+    does not actually implement; only the two JSON OAuth metadata documents are
+    real.
+  - >-
+    No security.txt is served on any host, so no SecurityTxt pointer is emitted.
+  - >-
+    No agent card was found on any host at either the current
+    /.well-known/agent-card.json path or the legacy /.well-known/agent.json path,
+    so no a2a/ artifact and no AgentCard pointer exist for this provider.

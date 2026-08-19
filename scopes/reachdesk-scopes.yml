@@ -1,0 +1,49 @@
+generated: '2026-08-13'
+method: probed
+source: https://app.reachdesk.com/.well-known/oauth-authorization-server
+docs: null
+description: >-
+  Reachdesk publishes exactly two OAuth scopes, and they belong to its remote MCP
+  server rather than to its REST API. They are read from the provider's own RFC
+  8414 authorization-server metadata and its RFC 9728 protected-resource metadata,
+  which agree. The REST API has no scope model at all — it authenticates with a
+  single organization-wide API token that carries every permission the
+  organization has.
+authorization_server: https://app.reachdesk.com
+resource: https://app.reachdesk.com
+surface: mcp
+scope_count: 2
+scopes:
+  - name: mcp:tools.user.read
+    description: >-
+      Read access to MCP tools acting on behalf of the authenticated Reachdesk
+      user. Description is inferred from the scope name — Reachdesk publishes the
+      scope string with no human-readable description and no scopes reference page.
+      Advertised in both scopes_supported lists.
+    access: read
+    documented_description: false
+  - name: mcp:tools.user.write
+    description: >-
+      Write access to MCP tools acting on behalf of the authenticated Reachdesk
+      user. Description inferred from the scope name; not documented by the
+      provider.
+    access: write
+    documented_description: false
+grant_types:
+  - authorization_code
+  - client_credentials
+  - refresh_token
+pkce: S256
+dynamic_client_registration: true
+notes:
+  - >-
+    The `user` segment in both scope names indicates tools are scoped to the
+    calling user, which mirrors the REST API's `sender` field (a send is always
+    made on behalf of a platform user).
+  - >-
+    No scopes/permissions reference page exists on reachdesk.readme.io or in the
+    Reachdesk knowledge base. method is `probed` rather than `searched` for exactly
+    that reason: these values come from a machine-readable endpoint, not from docs.
+  - >-
+    The REST API's OpenAPI declares a single apiKey security scheme with no scopes.
+    Nothing here applies to https://app.reachdesk.com/api/v2.

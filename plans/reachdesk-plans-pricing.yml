@@ -1,3 +1,7 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.reachdesk.com/pricing
+plan_count: 3
 specificationVersion: '0.1'
 id: reachdesk-plans-pricing
 name: Reachdesk Plans & Pricing
@@ -82,3 +86,9 @@ notes:
   - Swag sourcing is a separate offering with a $2,500 minimum order
   - ROI guarantee of 5x pipeline generated in first year or money back
   - API access for campaign triggering available; contact sales for details
+  - >-
+    Re-verified against https://www.reachdesk.com/pricing on 2026-08-13 (HTTP 200).
+    The page still states "Plans start at $20,000/year", carries the Core / Plus /
+    Premium tab set, and repeats the 5x ROI guarantee. No numeric per-tier list
+    price is published — every tier is "request a custom quote", so plan_count
+    counts published TIERS, not published PRICES.

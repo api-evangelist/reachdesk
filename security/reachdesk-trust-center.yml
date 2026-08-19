@@ -1,0 +1,61 @@
+generated: '2026-08-13'
+method: probed
+source: https://trust.reachdesk.com/
+description: >-
+  Reachdesk operates a public trust center on its own subdomain, hosted by Vanta.
+  The page exists and returns HTTP 200 with real Reachdesk-specific metadata, but
+  its contents — the certification list, the sub-processor list and any downloadable
+  reports — render client-side and the underlying Vanta API rejects unsigned
+  requests. No certification is claimed in this file because none could be verified
+  anonymously.
+trust_center:
+  present: true
+  url: https://trust.reachdesk.com/
+  http_status: 200
+  platform: Vanta
+  canonical: https://trust.reachdesk.com
+  title: Reachdesk Trust Center
+  vanta_slug_id: xoem6skatmbuels6wgi3l
+  checked: '2026-08-13'
+certifications:
+  verified: []
+  claimed: []
+  note: >-
+    NOT verified, not "none". The trust center is a Vite/React single-page app whose
+    only server-rendered content is <head> metadata. Vanta's data endpoints answer
+    401 Unauthorized (api.vanta.com) or require a `signature`/`signedAt` pair
+    (app.vanta.com/graphql), and the legacy GraphQL API is retired (HTTP 410). A
+    human with a browser can read the certification list; an anonymous machine
+    cannot. No Compliance pointer is emitted for this provider on the strength of a
+    page whose contents were unreadable.
+probes:
+  - url: https://trust.reachdesk.com/
+    status: 200
+    content_type: text/html
+    result: SPA shell only — no certification names present in the served HTML
+  - url: https://api.vanta.com/v1/trust-report/xoem6skatmbuels6wgi3l
+    status: 401
+    result: Unauthorized
+  - url: https://app.vanta.com/graphql
+    status: 400
+    result: 'Missing `signature` or `signedAt`'
+  - url: https://api.vanta.com/graphql
+    status: 410
+    result: GraphQL API retired in favour of the Vanta REST API
+related_evidence:
+  gdpr_api: >-
+    Reachdesk exposes first-class GDPR data-subject endpoints (POST /gdpr/requests
+    for erase_subject and export_subject). That is a concrete, machine-verifiable
+    privacy capability, and it is stronger evidence than an unreadable badge wall.
+  privacy_policy: https://www.reachdesk.com/privacy-policy
+  terms: https://www.reachdesk.com/terms-and-conditions
+  cookie_policy: https://www.reachdesk.com/cookie-policy
+  scim_saml: >-
+    SCIM 2.0 provisioning and SAML SSO with Okta, Microsoft Entra ID and OneLogin
+    are documented in the knowledge base.
+vulnerability_disclosure:
+  present: false
+  note: >-
+    No security.txt on any Reachdesk host, no /security or /vulnerability-disclosure
+    page on www.reachdesk.com (both 404), and no HackerOne, Bugcrowd or Intigriti
+    program found. No Security pointer is emitted.

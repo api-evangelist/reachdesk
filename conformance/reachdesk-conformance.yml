@@ -1,0 +1,185 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/reachdesk-api-openapi.yml +
+  well-known/reachdesk-oauth-authorization-server.json +
+  well-known/reachdesk-oauth-protected-resource.json +
+  https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta
+description: >-
+  Standards conformance assessment for Reachdesk. Every entry is judged against a
+  document Reachdesk actually serves or an artifact already in this repo. The
+  strongest results are on the MCP/OAuth side — Reachdesk implements the full
+  modern OAuth discovery stack (RFC 8414 + RFC 9728 + RFC 7591 + PKCE) — while the
+  REST API conforms to almost nothing beyond OpenAPI itself.
+standards:
+  - id: openapi-3.1
+    name: OpenAPI Specification 3.1.0
+    conforms: true
+    evidence: >-
+      https://reachdesk.readme.io/openapi/605275c06991600049cc768e serves a valid
+      OpenAPI 3.1.0 document declaring 9 operations, all with unique operationIds
+      and summaries. Saved verbatim to openapi/_original/.
+    caveats:
+      - >-
+        One path key is malformed: "/sends?start_date={start_date}&end_date={end_date}"
+        embeds a query string in the path template, which is not valid OpenAPI path
+        syntax. The real path is /sends.
+      - components.schemas is empty; no $ref reuse anywhere.
+      - No tags are declared and no operation is tagged.
+  - id: oauth2
+    name: OAuth 2.0 / 2.1 authorization framework
+    conforms: true
+    surface: mcp
+    evidence: >-
+      https://app.reachdesk.com/oauth/authorize + /oauth/token with
+      authorization_code, client_credentials and refresh_token grants, advertised in
+      the provider's own authorization-server metadata.
+  - id: rfc8414
+    name: OAuth 2.0 Authorization Server Metadata
+    conforms: true
+    evidence: >-
+      GET https://app.reachdesk.com/.well-known/oauth-authorization-server returns
+      200 application/json with issuer, authorization_endpoint, token_endpoint,
+      registration_endpoint, response_types_supported, grant_types_supported,
+      token_endpoint_auth_methods_supported, code_challenge_methods_supported and
+      scopes_supported.
+  - id: rfc9728
+    name: OAuth 2.0 Protected Resource Metadata
+    conforms: true
+    evidence: >-
+      GET https://app.reachdesk.com/.well-known/oauth-protected-resource returns 200
+      with resource, authorization_servers[], scopes_supported and
+      bearer_methods_supported. It is the document named in the WWW-Authenticate
+      challenge from POST /mcp, which is exactly how RFC 9728 is meant to be used.
+  - id: rfc7591
+    name: OAuth 2.0 Dynamic Client Registration
+    conforms: true
+    evidence: >-
+      registration_endpoint https://app.reachdesk.com/oauth/register is advertised,
+      and client_id_metadata_document_supported is true.
+  - id: rfc7636
+    name: PKCE
+    conforms: true
+    evidence: 'code_challenge_methods_supported: ["S256"] — S256 only, plain is not offered.'
+  - id: mcp
+    name: Model Context Protocol
+    conforms: true
+    evidence: >-
+      POST https://app.reachdesk.com/mcp returns a JSON-RPC 2.0 error envelope and a
+      WWW-Authenticate: Bearer realm="MCP" challenge. Tool list is auth-gated so the
+      protocol version could not be read.
+    caveats:
+      - protocolVersion not observable anonymously.
+  - id: oidc
+    name: OpenID Connect Discovery
+    conforms: false
+    evidence: >-
+      /.well-known/openid-configuration on app.reachdesk.com returns 200 but with
+      the application HTML shell, not an OIDC discovery document. No OIDC provider
+      metadata is served.
+  - id: scim2
+    name: SCIM 2.0
+    conforms: true
+    surface: platform-identity
+    evidence: >-
+      https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta
+      documents SCIM 2.0 user provisioning from Okta. This governs platform user
+      provisioning, not the gifting API.
+    caveats:
+      - No SCIM endpoint URL or schema is published; setup is described only via Okta.
+  - id: saml2
+    name: SAML 2.0 SSO
+    conforms: true
+    surface: platform-identity
+    evidence: >-
+      Documented setup guides for Okta, Microsoft Entra ID and OneLogin, plus
+      Just-in-Time provisioning.
+  - id: rfc9457
+    name: 'RFC 9457 Problem Details for HTTP APIs'
+    conforms: false
+    evidence: >-
+      No application/problem+json anywhere in the contract. Errors use two ad-hoc
+      JSON envelopes ({"error":...} and {"message":...}) plus bare text/plain. See
+      errors/reachdesk-problem-types.yml.
+  - id: rfc8594
+    name: 'RFC 8594 Sunset header / deprecation signalling'
+    conforms: false
+    evidence: >-
+      No Sunset or Deprecation headers documented, no deprecation policy published,
+      no operation marked deprecated. See lifecycle/reachdesk-lifecycle.yml.
+  - id: idempotency
+    name: Idempotent request semantics
+    conforms: false
+    evidence: >-
+      trigger-campaign and bulk-create accept a `request_id` described only as a
+      "random unique identifier generated for each request". No replay semantics, no
+      retention window, no Idempotency-Key header, and no statement that a duplicate
+      request_id is deduplicated. See conventions/reachdesk-conventions.yml.
+  - id: pagination
+    name: Consistent pagination
+    conforms: partial
+    evidence: >-
+      page/per_page on list-contacts and list-sends; list-transactions declares page
+      but not per_page. No total, next or has_more field is documented in any
+      response.
+  - id: rate-limit-headers
+    name: 'RateLimit header fields (draft-ietf-httpapi-ratelimit-headers)'
+    conforms: false
+    evidence: >-
+      No rate limits and no rate-limit response headers are documented anywhere. See
+      rate-limits/reachdesk-rate-limits.yml.
+  - id: gdpr
+    name: GDPR data-subject request handling
+    conforms: true
+    evidence: >-
+      POST /gdpr/requests accepts erase_subject and export_subject request types
+      keyed by subject email — a first-class API surface for data-subject rights,
+      which is uncommon. GET /gdpr/requests/{id} is published but marked "Coming
+      Soon" by the provider, so status cannot yet be read back.
+    caveats:
+      - The status read-back operation is documented but not live.
+  - id: iso3166
+    name: ISO 3166 country codes
+    conforms: true
+    evidence: 'recipient.country documented as "2-letter country code (ISO 3166), e.g. US".'
+  - id: iso4217
+    name: ISO 4217 currency codes
+    conforms: true
+    evidence: >-
+      payment_currency enum (AUD, CAD, DKK, EUR, GBP, INR, NOK, SEK, USD) and the
+      currencies[] transaction filter, documented as "ISO 4217 (3-letter)".
+  - id: iso8601
+    name: ISO 8601 dates
+    conforms: partial
+    evidence: >-
+      Date filters are documented as YYYY-MM-DD (date only, format: date). No
+      timestamp field format is documented on any response.
+  - id: llmstxt
+    name: llms.txt
+    conforms: true
+    evidence: >-
+      Served on two hosts — https://www.reachdesk.com/llms.txt (site map for agents)
+      and https://reachdesk.readme.io/llms.txt (API reference index with per-page .md
+      links). Both saved verbatim to llms/.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and the legacy /.well-known/agent.json miss on
+      every Reachdesk host. See well-known/reachdesk-well-known.yml.
+  - id: rfc9116
+    name: 'RFC 9116 security.txt'
+    conforms: false
+    evidence: No security.txt on any host.
+certifications:
+  published: unverified
+  trust_center: https://trust.reachdesk.com/
+  note: >-
+    Reachdesk operates a Vanta-hosted trust center that returns HTTP 200, but its
+    contents render client-side behind signed API requests and could not be read
+    anonymously. NO named certification (SOC 2, ISO 27001, PCI, HIPAA) is asserted
+    here because none could be verified. See security/reachdesk-trust-center.yml.
+summary:
+  conforms: 14
+  partial: 2
+  does_not_conform: 6

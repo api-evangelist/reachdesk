@@ -1,0 +1,203 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/reachdesk-api-openapi.yml +
+  https://reachdesk.readme.io/reference/authentication +
+  https://support.reachdesk.com/hc/en-gb/articles/29669486204305-Send-gifts-with-the-Reachdesk-Trigger-Campaign-API
+description: >-
+  Cross-cutting runtime semantics for the Reachdesk REST API v2 — how to
+  authenticate, paginate, filter, trace and interpret responses. Derived from the
+  provider's OpenAPI 3.1 contract and its published reference and knowledge-base
+  articles. Where a convention is not published, this file says so rather than
+  filling it in.
+
+authentication:
+  style: bearer-api-token
+  header: Authorization
+  value_format: 'Bearer {api_token}'
+  scope_model: none
+  granularity: organization-wide
+  rotation_policy: undocumented
+  detail: authentication/reachdesk-authentication.yml
+
+versioning:
+  style: uri-path
+  current: v2
+  base_url: https://app.reachdesk.com/api/v2
+  info_version: '1.0'
+  header_negotiation: false
+  note: >-
+    The path says v2, the OpenAPI info.version says 1.0, and no policy explains the
+    relationship. No prior version is documented and no version-selection header
+    exists.
+
+pagination:
+  style: page-number
+  applies_to:
+    - list-contacts
+    - list-sends
+    - list-transactions
+  parameters:
+    - name: page
+      in: query
+      type: integer
+      default: 1
+    - name: per_page
+      in: query
+      type: integer
+      default: 25
+  response_fields: undocumented
+  max_per_page: undocumented
+  cursor: false
+  note: >-
+    list-transactions declares `page` but NOT `per_page`, which is an
+    inconsistency in the provider's own contract. No total-count, next-page or
+    has-more field is documented in any 200 response, so a client cannot tell when
+    it has reached the last page except by receiving a short page.
+
+filtering:
+  date_ranges:
+    format: 'YYYY-MM-DD'
+    pairs:
+      - start_date / end_date (list-sends, list-transactions)
+      - start_updated_date / end_updated_date (list-sends, mutually dependent)
+  array_filters:
+    style: 'bracket-suffixed repeated query params (name[])'
+    parameters:
+      - transaction_types[]
+      - states[]
+      - currencies[]
+      - campaign_types[]
+      - team_ids[]
+      - user_ids[]
+    note: Rails-style array parameters. Enum values are listed in the parameter descriptions.
+  scalar_filters:
+    - account_name (list-contacts, matches contact company name)
+
+idempotency:
+  supported: unclear
+  key_field: request_id
+  location: request body
+  applies_to:
+    - trigger-campaign
+    - bulk-create
+  required_on: bulk-create (listed in `required`)
+  provider_description: 'Random uniquely identifier generated for each request'
+  assessment: >-
+    NOT recorded as idempotency support. Reachdesk asks for a unique identifier per
+    request but never states what happens when the same request_id is replayed —
+    there is no published statement that a duplicate returns the original result
+    rather than sending a second gift, no retention window, and no Idempotency-Key
+    header. On an API whose write operation spends real money and ships a physical
+    object, the absence of that statement is the finding. Treat every retry of
+    trigger-campaign or bulk_sends as potentially duplicating a send until
+    Reachdesk documents the semantics.
+  header: none
+  retention: undocumented
+
+request_tracing:
+  correlation_id_header: none documented
+  response_id_header: >-
+    x-request-id is present on live responses from app.reachdesk.com (observed on
+    the 401 from POST /mcp), but it is not documented in the API reference and is
+    not declared in the OpenAPI, so it cannot be relied on.
+  source_field: >-
+    trigger-campaign accepts a `source` body field ("Name of the source of the
+    trigger") which is the provider's own attribution mechanism for identifying
+    which system triggered a send.
+
+metadata:
+  mechanism: custom_attributes
+  shape: 'array of {name, value} objects'
+  applies_to:
+    - trigger-campaign
+    - bulk-create
+  naming_rule: 'underscores instead of spaces (e.g. custom_gift_note)'
+  usage: >-
+    Referenced inside campaign templates as {{custom_attribute_name}}, and usable
+    in any gift note, gift email or gift option text field. Added in the March 2026
+    release.
+  echoed_in_response: true
+
+error_envelope:
+  rfc9457: false
+  shapes:
+    - '{"error": "<message>"}'
+    - '{"message": "<message>"}'
+    - '{}'
+    - 'text/plain, empty'
+  detail: errors/reachdesk-problem-types.yml
+
+rate_limit_signaling:
+  documented: false
+  response_headers: none documented
+  status_on_exhaustion: undocumented
+  retry_after: not documented
+  detail: rate-limits/reachdesk-rate-limits.yml
+
+async_semantics:
+  operations:
+    - operation: bulk-create
+      status: 202
+      response: '{"id": <bulk_send_id>}'
+      behaviour: >-
+        Accepts up to 5000 recipients, returns immediately with a bulk send id, and
+        creates the individual gifts in the background.
+      completion_signal: >-
+        NOT documented. There is no GET /bulk_sends/{id}, no callback and no event
+        for bulk completion. A client must poll list-sends and correlate, which the
+        provider does not describe how to do.
+  approval_workflow:
+    field: approved
+    values:
+      - 'true — process immediately; invalid sends return an error'
+      - 'false — create the send in a pending state for manual review'
+      - 'auto — try to approve automatically, fall back to pending if invalid'
+    note: >-
+      This is the closest thing the API has to a state machine, and it is the field
+      an agent must set deliberately: `false` makes every API-triggered gift
+      require a human approval in the Reachdesk UI before money moves.
+
+payment_semantics:
+  wallet_selection:
+    inputs:
+      - payment_currency
+      - payment_wallet_type (User | Team, default User)
+      - team_name
+    rules_source: https://support.reachdesk.com/hc/en-gb/articles/29669486204305-Send-gifts-with-the-Reachdesk-Trigger-Campaign-API
+    fallbacks:
+      - If payment_currency is empty, the campaign's currency is used.
+      - If payment_wallet_type is empty, User is assumed.
+      - If the required User wallet does not exist, it is created automatically.
+      - >-
+        If the required Team wallet does not exist and the sender belongs to that
+        team, it is created automatically.
+      - >-
+        If the required Team wallet does not exist and the sender does NOT belong
+        to that team, Reachdesk silently falls back to the sender's User wallet in
+        that currency.
+    note: >-
+      That last fallback is silent — the API does not error, it charges a different
+      wallet. Agents that care which budget is debited must set team_name and
+      verify payment_wallet_id in the response.
+
+campaign_constraints:
+  - >-
+    The trigger API accepts MANUAL campaigns only. Automated campaigns are rejected.
+  - >-
+    The gift itself (amount, bundle items, note template, marketplace product) comes
+    from the campaign configuration, never from the request. The API only supplies
+    recipients, sender, payment routing and custom attributes.
+
+delivery_modes:
+  field: send_method
+  values:
+    - 'email (default) — emails the gift to the recipient'
+    - 'link — returns a shareable claim_url in the response instead of emailing'
+
+cross_links:
+  authentication: authentication/reachdesk-authentication.yml
+  errors: errors/reachdesk-problem-types.yml
+  lifecycle: lifecycle/reachdesk-lifecycle.yml
+  rate_limits: rate-limits/reachdesk-rate-limits.yml
+  data_model: data-model/reachdesk-data-model.yml

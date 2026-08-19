@@ -1,3 +1,8 @@
+generated: '2026-08-13'
+method: searched
+source: https://reachdesk.readme.io/reference/authentication
+limit_count: 0
+documented: false
 specificationVersion: '0.1'
 id: reachdesk-rate-limits
 name: Reachdesk API Rate Limits
@@ -32,3 +37,10 @@ notes:
   - Rate limits are undocumented publicly as of 2026-06-13
   - Practical throughput is constrained by monthly gift volume allocations per plan
   - Pagination and webhook rate limits are also undocumented
+  - >-
+    Re-checked 2026-08-13 against the full ReadMe API reference
+    (https://reachdesk.readme.io/, 11 pages incl. every operation) and the Reachdesk
+    knowledge base. No rate limit, quota, throttle, burst, 429 status or
+    Retry-After/RateLimit-*/X-RateLimit-* response header is documented anywhere.
+    The OpenAPI declares no 429 on any of the 9 operations. limit_count is an honest
+    zero: nothing is published, not "we did not look".

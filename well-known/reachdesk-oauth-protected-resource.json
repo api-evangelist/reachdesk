@@ -1,0 +1,1 @@
+{"resource":"https://app.reachdesk.com","authorization_servers":["https://app.reachdesk.com"],"scopes_supported":["mcp:tools.user.read","mcp:tools.user.write"],"bearer_methods_supported":["header"]}

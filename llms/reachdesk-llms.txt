@@ -1,0 +1,37 @@
+# Reachdesk
+
+> Reachdesk is a global B2B gifting and swag platform that lets companies send personalized gifts and direct mail to prospects, customers, and employees to build relationships and drive measurable results.
+
+## Platform
+- [Platform overview](https://www.reachdesk.com/overview): Full tour of the Reachdesk gifting and swag platform.
+- [Personalized gifting](https://www.reachdesk.com/personalized-gifting): Scaling personalized B2B gifting with AI.
+- [Integrations](https://www.reachdesk.com/integrations): Connecting Reachdesk to your CRM, marketing, and sales stack.
+- [Global warehousing](https://www.reachdesk.com/global-warehousing): Worldwide warehousing and fulfillment for swag and gifts.
+- [Swag management](https://www.reachdesk.com/swag-management): Managing and distributing branded swag globally.
+- [Reporting](https://www.reachdesk.com/reporting): Tracking ROI and gifting campaign performance.
+- [Budgeting](https://www.reachdesk.com/budgeting): Controlling and managing corporate gifting budgets.
+- [Creative services](https://www.reachdesk.com/creative-services): Creative strategy and design for gifting campaigns.
+- [Events fulfillment](https://www.reachdesk.com/events-fulfillment): Gifting and fulfillment for events.
+
+## Solutions by team
+- [Marketing](https://www.reachdesk.com/marketing): Gifting for ABM, demand gen, and field marketing teams.
+- [Sales](https://www.reachdesk.com/sales): Booking more meetings with gift automation.
+- [Customer success](https://www.reachdesk.com/customer-success): Gifting to retain and grow accounts.
+- [HR & people](https://www.reachdesk.com/people): Gifting for HR and people teams.
+- [Employee engagement](https://www.reachdesk.com/employee-engagement): Boosting employee engagement with gifts.
+
+## Pricing & customers
+- [Pricing](https://www.reachdesk.com/pricing): Reachdesk pricing and plans.
+- [Customer stories](https://www.reachdesk.com/customers/salesloft): How Salesloft drove 60x ROI with personalized gifting.
+
+## Resources
+- [Resources](https://www.reachdesk.com/resources): Guides, articles, and content library.
+- [Ebooks](https://www.reachdesk.com/ebooks): Downloadable ebooks on B2B gifting.
+
+## Optional
+- [Field & event marketing](https://www.reachdesk.com/marketing/field-event-marketing)
+- [Marketing operations](https://www.reachdesk.com/marketing/marketing-operations)
+- [Account-based marketing](https://www.reachdesk.com/marketing/account-based-marketing)
+- [Demand generation](https://www.reachdesk.com/marketing/demand-generation)
+- [Gifting for SDRs](https://www.reachdesk.com/sales/sales-development-representitive)
+- [Gifting for AEs & AMs](https://www.reachdesk.com/sales/account-executives-and-account-managers)

@@ -1,0 +1,100 @@
+generated: '2026-08-13'
+method: searched
+source: https://reachdesk.readme.io/reference/authentication
+docs: https://reachdesk.readme.io/reference/authentication
+derived_from: openapi/reachdesk-api-openapi.yml
+description: >-
+  Reachdesk runs two independent authentication models on the same host. The REST
+  API at https://app.reachdesk.com/api/v2 uses a long-lived organization API token
+  presented as a bearer credential in the Authorization header. The remote MCP
+  server at https://app.reachdesk.com/mcp uses OAuth 2.1 with dynamic client
+  registration and PKCE. They do not share credentials.
+summary:
+  types:
+    - apiKey
+    - oauth2
+  api_key_in:
+    - header
+  oauth2_surface: mcp
+schemes:
+  - name: sec0
+    type: apiKey
+    in: header
+    parameter: Authorization
+    format: 'Bearer {api_token}'
+    surface: rest
+    applies_to: all 9 REST operations (declared as a root-level security requirement)
+    token_management: https://app.reachdesk.com/api_tokens
+    provisioning: >-
+      An Organization Admin creates and revokes tokens in the Reachdesk platform
+      under Organization > Settings > API Tokens > Add New. Tokens are
+      organization-scoped, not per-user.
+    example_request: |
+      curl https://app.reachdesk.com/api/v2/organization \
+        -H "Authorization: Bearer {api_token}"
+    sources:
+      - openapi/reachdesk-api-openapi.yml
+      - https://reachdesk.readme.io/reference/authentication
+      - https://support.reachdesk.com/hc/en-gb/articles/29669486204305-Send-gifts-with-the-Reachdesk-Trigger-Campaign-API
+    notes:
+      - >-
+        The OpenAPI declares this as type apiKey with x-bearer-format bearer, so
+        the literal header value is "Bearer <token>" even though the scheme is not
+        modelled as http/bearer.
+      - >-
+        No token expiry, rotation cadence or scope model is documented. The token
+        carries whatever the organization can do; there is no per-endpoint
+        restriction published.
+  - name: mcp-oauth
+    type: oauth2
+    surface: mcp
+    applies_to: https://app.reachdesk.com/mcp
+    issuer: https://app.reachdesk.com
+    authorization_endpoint: https://app.reachdesk.com/oauth/authorize
+    token_endpoint: https://app.reachdesk.com/oauth/token
+    registration_endpoint: https://app.reachdesk.com/oauth/register
+    grant_types:
+      - authorization_code
+      - client_credentials
+      - refresh_token
+    pkce: S256
+    token_endpoint_auth_methods:
+      - client_secret_basic
+      - client_secret_post
+      - none
+    scopes:
+      - mcp:tools.user.read
+      - mcp:tools.user.write
+    dynamic_client_registration: true
+    sources:
+      - well-known/reachdesk-oauth-authorization-server.json
+      - well-known/reachdesk-oauth-protected-resource.json
+    notes:
+      - >-
+        Discovered by probe. Reachdesk does not document this OAuth surface in its
+        API reference or knowledge base.
+
+platform_identity:
+  description: >-
+    Distinct from API authentication: end-user access to the Reachdesk application
+    supports SAML SSO and SCIM 2.0 user provisioning. These govern human logins,
+    not API calls.
+  saml_sso:
+    supported: true
+    providers:
+      - Okta
+      - Microsoft Entra ID
+      - OneLogin
+    jit_provisioning: true
+    source: https://support.reachdesk.com/hc/en-gb/articles/4420374592017-Just-in-Time-JIT-Provisioning-SAML
+  scim:
+    supported: true
+    version: '2.0'
+    source: https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta
+
+gaps:
+  - No documented token rotation or expiry policy for REST API tokens.
+  - No scope or permission model on the REST API — one token, full organization access.
+  - >-
+    The MCP OAuth surface is undocumented; a developer cannot learn it exists
+    without probing the host.

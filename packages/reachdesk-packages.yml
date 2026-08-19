@@ -1,0 +1,79 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  npm registry, PyPI, RubyGems, the Reachdesk GitHub organization
+  (https://github.com/Reachdesk), reachdesk.readme.io and the Reachdesk knowledge base
+description: >-
+  Reachdesk publishes NO client SDK for its API, in any language, in any registry.
+  Every registry named below was queried unauthenticated and returned 404 for every
+  plausible package name. The Reachdesk GitHub organization has exactly one public
+  repository and it is a fork of a third-party Rails engine, not a client library.
+  A developer integrating the Reachdesk API writes raw HTTP.
+package_count: 0
+official_sdk_count: 0
+registries_searched:
+  - registry: npm
+    endpoint: https://registry.npmjs.org/
+    queries:
+      - reachdesk (404)
+      - '@reachdesk/sdk (404)'
+      - reachdesk-api (404)
+      - reachdesk-node (404)
+    result: no packages
+  - registry: pypi
+    endpoint: https://pypi.org/pypi/
+    queries:
+      - reachdesk (404)
+      - reachdesk-api (404)
+    result: no packages
+  - registry: rubygems
+    endpoint: https://rubygems.org/api/v1/gems/
+    result: no Reachdesk API client gem
+  - registry: maven-central
+    result: no packages
+  - registry: nuget
+    result: no packages
+  - registry: pkg.go.dev
+    result: no packages
+  - registry: packagist
+    result: no packages
+  - registry: crates.io
+    result: no packages
+packages: []
+related:
+  - name: gdpr_admin
+    language: ruby
+    registry: rubygems
+    url: https://rubygems.org/gems/gdpr_admin
+    repository: https://github.com/Reachdesk/gdpr_admin
+    version: 1.9.0
+    published: '2024-03-15'
+    license: MIT
+    official: false
+    is_api_client: false
+    description: >-
+      A Rails engine for automating GDPR processes. It sits under the Reachdesk
+      GitHub organization — the org's only public repository — and is plausibly the
+      machinery behind the API's own /gdpr/requests endpoints.
+    why_not_official: >-
+      The Reachdesk copy is a FORK (github.com/Reachdesk/gdpr_admin, forked
+      2026-07-30) of Colex/gdpr_admin. The published gem is owned by the RubyGems
+      user `Colex`, and its homepage_uri and source_code_uri both point at
+      Colex/gdpr_admin, not at Reachdesk. It is recorded here for completeness, not
+      counted as a first-party package, and it is not a client for the Reachdesk API.
+    last_release_age: >-
+      1.9.0 was published 2024-03-15 — more than two years before this check, and the
+      fork's own default branch has no commits after that date.
+notes:
+  - >-
+    No SDKs pointer is emitted in apis.yml. package_count is 0 and
+    official_sdk_count is 0; the single `related` entry is a third-party Rails engine
+    forked into the company org, not an API client, and crediting it as an SDK would
+    be false.
+  - >-
+    The API reference at reachdesk.readme.io offers cURL examples only. No language
+    tabs, no install instructions, no code-generation download.
+  - >-
+    Reachdesk's integration story is delivered through native connectors (Salesforce,
+    HubSpot, Marketo, Outreach, Salesloft, Zapier and others) rather than through
+    developer libraries. See integrations coverage in the knowledge base.

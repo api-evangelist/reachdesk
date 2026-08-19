@@ -1,0 +1,100 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.reachdesk.com/hc/en-gb/sections/42445556644497-2026-Releases
+url: https://support.reachdesk.com/hc/en-gb/sections/42445556644497-2026-Releases
+description: >-
+  Reachdesk publishes monthly, dated product release notes in its knowledge base,
+  organised by year (2026 Releases, 2025 Releases). It is a product changelog aimed
+  at platform users rather than a developer changelog, but API changes are called
+  out in it — the January and March 2026 entries each announce a REST API change.
+  There is no changelog on the API reference site (reachdesk.readme.io publishes no
+  /changelog).
+scheme: monthly-dated
+cadence: monthly
+current_version: v2
+versioned_entries: false
+breaking_changes_flagged: false
+sections:
+  - name: 2026 Releases
+    url: https://support.reachdesk.com/hc/en-gb/sections/42445556644497-2026-Releases
+    entry_count: 6
+  - name: 2025 Releases
+    url: https://support.reachdesk.com/hc/en-gb/sections/32084539413009-2025-Releases
+entries:
+  - date: '2026-07-31'
+    title: Release Notes | July 2026
+    url: https://support.reachdesk.com/hc/en-gb/articles/49346385782161-Release-Notes-July-2026
+    api_affecting: false
+    breaking: false
+    highlights:
+      - Marketplace gift claiming with Recipient's Choice
+      - Amazon Gifting expanded across more European countries
+      - One-click All Brands Gift Card campaigns
+      - Multi-location printing with Corporate Merch
+  - date: '2026-06-01'
+    title: Release Notes | May 2026
+    url: https://support.reachdesk.com/hc/en-gb/articles/47280046031761-Release-Notes-May-2026
+    api_affecting: false
+    breaking: false
+    highlights:
+      - Redesigned warehouse item creation and editing
+      - Event returns for Australia and Canada warehouses
+      - Standard vs express shipping choice for Events
+      - Return labels charged only when used
+  - date: '2026-04-29'
+    title: Release Notes | April 2026
+    url: https://support.reachdesk.com/hc/en-gb/articles/46214373676305-Release-Notes-April-2026
+    api_affecting: false
+    breaking: false
+    highlights:
+      - Improved item creation and editing for warehouse inventory
+      - New address confirmation page
+      - Automated gift-card reminder emails for recipients
+  - date: '2026-03-31'
+    title: Release Notes | March 2026
+    url: https://support.reachdesk.com/hc/en-gb/articles/45290079409681-Release-Notes-March-2026
+    api_affecting: true
+    breaking: false
+    additions:
+      - >-
+        Public API enhancement — custom attributes can now be pushed to the API to
+        trigger sends, customising gift notes, gift options and gift emails. This
+        is the `custom_attributes` array on trigger-campaign and bulk-create.
+    highlights:
+      - Amazon products in the catalog menu; Amazon spend export on the Sends page
+      - AI-powered support agent launched
+  - date: '2026-03-02'
+    title: Release Notes | February 2026
+    url: https://support.reachdesk.com/hc/en-gb/articles/44367956595345-Release-Notes-February-2026
+    api_affecting: false
+    breaking: false
+    highlights:
+      - >-
+        Gifty launched — Reachdesk's own AI gifting agent, searching the Reachdesk
+        marketplace and Amazon catalog, available to organizations with AI enabled
+      - Redesigned gift emails with personalised signatures and gift images
+  - date: '2025-12-29'
+    title: Release Notes | January 2026
+    url: https://support.reachdesk.com/hc/en-gb/articles/42323616203281-Release-Notes-January-2026
+    api_affecting: true
+    breaking: false
+    additions:
+      - >-
+        List Sends API enhancements — the response now exposes more detail about
+        each gift, including the chosen gift or charity name and warehouse items
+        with quantities.
+    highlights:
+      - Stock shipment flow simplified across Events, Warehouse Transfers and Large Shipments
+      - Event return costs charged only when returns are received
+notes:
+  - >-
+    Entries are not versioned and breaking changes are not flagged as such. A
+    consumer cannot tell from the changelog whether a release changes a response
+    shape they depend on — the January 2026 List Sends change added fields to a
+    response body and is described only in prose.
+  - >-
+    The article created_at date is used as the entry date. The January 2026 notes
+    were published 2025-12-29.
+  - >-
+    Neither the remote MCP server at app.reachdesk.com/mcp nor its OAuth surface
+    has ever been announced in the release notes.

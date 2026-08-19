@@ -1,0 +1,263 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reachdesk API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trigger Campaign",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://app.reachdesk.com/api/v2/campaigns/:id/trigger",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "ID of the campaign being triggered"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Trigger a gift send from a campaign."
+    },
+    {
+      "info": {
+        "name": "Get Organization",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://app.reachdesk.com/api/v2/organization"
+      },
+      "docs": "Retrieve the basic information about the Organization associated to the given API Token."
+    },
+    {
+      "info": {
+        "name": "Create GDPR Request",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://app.reachdesk.com/api/v2/gdpr/requests",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a GDPR Request for erasing or exporting subject data."
+    },
+    {
+      "info": {
+        "name": "Get GDPR Request",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://app.reachdesk.com/api/v2/gdpr/requests/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get the information and status about an existing GDPR Request (Coming Soon)"
+    },
+    {
+      "info": {
+        "name": "List Contacts",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://app.reachdesk.com/api/v2/contacts",
+        "params": [
+          {
+            "name": "account_name",
+            "value": "",
+            "type": "query",
+            "description": "Filter results by contact's company name"
+          },
+          {
+            "name": "page",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "per_page",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Get a list of contacts within your organization."
+    },
+    {
+      "info": {
+        "name": "List Sends",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://app.reachdesk.com/api/v2/sends?start_date=:start_date&end_date=:end_date",
+        "params": [
+          {
+            "name": "start_date",
+            "value": "",
+            "type": "query",
+            "description": "Filter sends from the given date onwards. Format: YYYY-MM-DD (optional)"
+          },
+          {
+            "name": "end_date",
+            "value": "",
+            "type": "query",
+            "description": "Return sends created before the given date. Format: YYYY-MM-DD (optional)"
+          },
+          {
+            "name": "page",
+            "value": "",
+            "type": "query",
+            "description": "Pagination value"
+          },
+          {
+            "name": "per_page",
+            "value": "",
+            "type": "query",
+            "description": "number of results per page"
+          },
+          {
+            "name": "start_updated_date",
+            "value": "",
+            "type": "query",
+            "description": "Filter sends from first update date (depends on end_updated_date). Format: YYYY-MM-DD (optional)"
+          },
+          {
+            "name": "end_updated_date",
+            "value": "",
+            "type": "query",
+            "description": "Filter sends from the last update date (Depends on start_updated_date). Format: YYYY-MM-DD (optional)"
+          }
+        ]
+      },
+      "docs": "Get a list of Sends within your Organization"
+    },
+    {
+      "info": {
+        "name": "List Transactions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://app.reachdesk.com/api/v2/transactions",
+        "params": [
+          {
+            "name": "start_date",
+            "value": "",
+            "type": "query",
+            "description": "Filter transactions created from start date"
+          },
+          {
+            "name": "end_date",
+            "value": "",
+            "type": "query",
+            "description": "Filter transactions created until end date"
+          },
+          {
+            "name": "page",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "transaction_types[]",
+            "value": "",
+            "type": "query",
+            "description": "Filter by transaction types. Available values: balance_allocation, balance_top_up, campaign_sends, contracted_free_credit, contracted_paid_credit, currency_conversion, free_credit, other, refund, sourced_items, upfront_balance_top_up, warehouse_sends, store_portal"
+          },
+          {
+            "name": "states[]",
+            "value": "",
+            "type": "query",
+            "description": "Filter by transaction state. Available values: cancelled, pending, processed."
+          },
+          {
+            "name": "currencies[]",
+            "value": "",
+            "type": "query",
+            "description": "Filter by transaction currency. Use ISO 4217 (3-letter). Available values: AUD, CAD, DKK, EUR, GBP, INR, NOK, SEK, USD"
+          },
+          {
+            "name": "campaign_types[]",
+            "value": "",
+            "type": "query",
+            "description": "Filter by campaign types. Available values: bundle, gift_card, marketplace, note"
+          },
+          {
+            "name": "team_ids[]",
+            "value": "",
+            "type": "query",
+            "description": "Filter transactions by users within given teams."
+          },
+          {
+            "name": "user_ids[]",
+            "value": "",
+            "type": "query",
+            "description": "Filter transactions by the users associated."
+          }
+        ]
+      },
+      "docs": "Get a list of transactions within your organization."
+    },
+    {
+      "info": {
+        "name": "Get Send",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://app.reachdesk.com/api/v2/sends/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "Unique identifier of the send"
+          }
+        ]
+      },
+      "docs": "Retrieves a single send"
+    },
+    {
+      "info": {
+        "name": "Bulk Send",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://app.reachdesk.com/api/v2/bulk_sends",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Trigger a gift send from a campaign to many recipients in a single request.  This is the bulk counterpart to Trigger Campaign. Instead of one recipient per call, you send a list of recipients and the request is processed asynchronously: the endpoint responds immediately with a bulk send `id`, and the individual gifts are created in the background. As with the single trigger, each gift is built from the campaign's own configuration — you don't send the gift-card amount, bundle items, note templat"
+    }
+  ],
+  "bundled": true
+}

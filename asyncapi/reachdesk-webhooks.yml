@@ -1,0 +1,75 @@
+generated: '2026-08-13'
+method: searched
+source: https://support.reachdesk.com/hc/en-gb/articles/7020386897681-Set-up-an-Automated-Campaign-in-HubSpot-using-a-Webhook
+description: >-
+  Reachdesk's documented webhook surface runs INBOUND, not outbound. When an admin
+  creates an Automated Campaign and picks a connector, Reachdesk mints a POST
+  webhook URL that the connected system (HubSpot, Marketo, Influitive and others)
+  calls to trigger a gift send. Reachdesk is the receiver. There is NO outbound
+  event surface: Reachdesk publishes no event catalogue, no subscription API, no
+  signed callbacks to customer endpoints, and no AsyncAPI document. That asymmetry
+  is the finding — an agent can cause a Reachdesk send by event, but cannot be
+  notified when one is claimed, delivered or fails.
+asyncapi_spec: false
+webhooks:
+  direction: inbound
+  count: 1
+  catalog:
+    - name: Automated Campaign trigger webhook
+      direction: inbound
+      method: POST
+      url: >-
+        Generated per automated campaign inside the Reachdesk app; not a fixed
+        public URL and not documented as a URL template.
+      created_in: 'Automated Campaigns > New Automated Campaign > select connector'
+      payload: >-
+        Contact fields supplied by the calling system. HubSpot's guide names Email,
+        First Name, Last Name, and Address for physical items as the properties that
+        must be present in the workflow payload for Reachdesk to map the recipient.
+      authentication:
+        optional: true
+        mechanism: Reachdesk API token added as a header on the calling system's webhook action
+        note: >-
+          Token authentication on the inbound webhook is OPT-IN and gated on a
+          support request — the article states you must contact support@reachdesk.com
+          before enabling the requirement. By default the generated webhook URL is a
+          bearer-of-the-URL secret with no signature verification, no timestamp and
+          no replay protection documented.
+      result: >-
+        The triggered send appears in the Reachdesk Sends tab for Review, Approve or
+        Reject, and a record is written back to the contact's activity in the
+        calling system.
+      connectors_documented:
+        - HubSpot
+        - Marketo
+        - Influitive
+        - Salesloft
+        - Outreach
+        - Microsoft Dynamics
+        - Pardot
+        - Eloqua
+        - Zapier
+      sources:
+        - https://support.reachdesk.com/hc/en-gb/articles/7020386897681-Set-up-an-Automated-Campaign-in-HubSpot-using-a-Webhook
+        - https://support.reachdesk.com/hc/en-gb/articles/23699474233233-Use-a-custom-Marketo-variable-in-a-Reachdesk-webhook-for-an-Automated-Campaign
+        - https://support.reachdesk.com/hc/en-gb/articles/4929404259601-Integrate-Reachdesk-with-Influitive
+outbound_events:
+  published: false
+  subscription_api: false
+  signing: false
+  event_catalog: false
+  note: >-
+    No outbound webhooks, no event stream, no callback registration. Send status
+    changes (pending -> approved -> processed -> claimed -> delivered) are only
+    observable by polling GET /sends and GET /sends/{id}. The bulk endpoint makes
+    this worse: POST /bulk_sends returns 202 with an id and there is no completion
+    event and no GET for that id.
+gaps:
+  - No AsyncAPI document — nothing to fabricate one from, so none is written.
+  - No outbound event surface of any kind.
+  - >-
+    Inbound webhook authentication is optional and requires contacting support to
+    turn on.
+  - >-
+    The inbound webhook URL shape is never published; it exists only inside a
+    customer's campaign configuration.

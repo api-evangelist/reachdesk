@@ -1,0 +1,15 @@
+# Reachdesk Documentation
+
+> Documentation for Reachdesk
+
+## API Reference
+- [Authentication](https://reachdesk.readme.io/reference/authentication.md)
+- [Trigger Campaign](https://reachdesk.readme.io/reference/trigger-campaign.md): Trigger a gift send from a campaign.
+- [Bulk Send](https://reachdesk.readme.io/reference/bulk-create.md): Trigger a gift send from a campaign to many recipients in a single request.  This is the bulk counterpart to Trigger Campaign. Instead of one recipient per call, you send a list of recipients and the request is processed asynchronously: the endpoint responds immediately with a bulk send `id`, and the individual gifts are created in the background. As with the single trigger, each gift is built from the campaign's own configuration — you don't send the gift-card amount, bundle items, note template, or marketplace product. You only provide the recipients and the sender; everything else comes from the campaign. It works for every campaign type (gift card, note, bundle, marketplace).
+- [List Sends](https://reachdesk.readme.io/reference/list-sends.md): Get a list of Sends within your Organization
+- [Get Send](https://reachdesk.readme.io/reference/get-send.md): Retrieves a single send
+- [List Contacts](https://reachdesk.readme.io/reference/list-contacts.md): Get a list of contacts within your organization.
+- [Get Organization](https://reachdesk.readme.io/reference/get-organization.md): Retrieve the basic information about the Organization associated to the given API Token.
+- [List Transactions](https://reachdesk.readme.io/reference/list-transactions.md): Get a list of transactions within your organization.
+- [Create GDPR Request](https://reachdesk.readme.io/reference/create-gdpr-request.md): Create a GDPR Request for erasing or exporting subject data.
+- [Get GDPR Request](https://reachdesk.readme.io/reference/get-gdpr-request.md): Get the information and status about an existing GDPR Request (Coming Soon)

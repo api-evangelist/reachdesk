@@ -1,0 +1,195 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Reachdesk API
+  version: 1.0.0
+x-provenance:
+  generated: '2026-08-13'
+  method: generated
+  source: openapi/reachdesk-api-openapi.yml
+  extends: openapi/reachdesk-api-openapi.yml
+  original: openapi/_original/reachdesk-openapi-original.json
+  note: >-
+    This overlay carries API Evangelist's enhancements to the Reachdesk API
+    contract. It is never applied to the original — the original stays verbatim.
+    It records three classes of change: (1) metadata the provider omits (contact,
+    licence, description, docs link), (2) tags and grouping the contract has none
+    of, and (3) the operational facts the contract does not encode — that the
+    trigger operation spends money and ships a physical object, that its only
+    declared response is a 200, and that the /sends path key is malformed.
+actions:
+  # ---- 1. info block the provider leaves nearly empty ----
+  - target: $.info
+    description: >-
+      Add a real description, the developer reference link, and the support
+      contact. The provider ships only title and version.
+    update:
+      description: >-
+        The Reachdesk API triggers gift sends from preconfigured campaigns and
+        reads back sends, contacts, transactions and organization data. It is a
+        spend-bearing API: a successful call to POST /campaigns/{id}/trigger
+        debits a funding wallet and dispatches a physical or digital gift to a
+        named person. The gift itself is configured in the campaign, not in the
+        request.
+      contact:
+        name: Reachdesk Support
+        email: support@reachdesk.com
+        url: https://support.reachdesk.com/hc/en-gb
+      x-documentation: https://reachdesk.readme.io/reference/authentication
+      x-knowledge-base: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+
+  # ---- 2. tags — the contract declares none and tags no operation ----
+  - target: $
+    description: Introduce a tag vocabulary; the provider's contract has no tags at all.
+    update:
+      tags:
+        - name: Sends
+          description: Triggering gift sends and reading them back.
+        - name: Contacts
+          description: Contacts known to the organization.
+        - name: Transactions
+          description: The money ledger behind gift sends.
+        - name: Organization
+          description: Account-level information for the authenticating API token.
+        - name: GDPR
+          description: Data-subject erasure and export requests.
+  - target: $.paths['/campaigns/{id}/trigger'].post
+    update:
+      tags: [Sends]
+  - target: $.paths['/bulk_sends'].post
+    update:
+      tags: [Sends]
+  - target: $.paths['/sends/{id}'].get
+    update:
+      tags: [Sends]
+  - target: $.paths['/contacts'].get
+    update:
+      tags: [Contacts]
+  - target: $.paths['/transactions'].get
+    update:
+      tags: [Transactions]
+  - target: $.paths['/organization'].get
+    update:
+      tags: [Organization]
+  - target: $.paths['/gdpr/requests'].post
+    update:
+      tags: [GDPR]
+  - target: $.paths['/gdpr/requests/{id}'].get
+    update:
+      tags: [GDPR]
+
+  # ---- 3. security scheme naming and description ----
+  - target: $.components.securitySchemes.sec0
+    description: >-
+      Name and describe the credential. `sec0` is a generated placeholder that tells
+      a consumer nothing.
+    update:
+      description: >-
+        Organization API token, presented as `Authorization: Bearer {api_token}`.
+        Created and revoked by an Organization Admin under Organization > Settings >
+        API Tokens, or at https://app.reachdesk.com/api_tokens. The token is
+        organization-wide — there is no scope or permission model.
+      x-displayName: Reachdesk API Token
+      x-token-management: https://app.reachdesk.com/api_tokens
+
+  # ---- 4. consequence annotations the contract does not carry ----
+  - target: $.paths['/campaigns/{id}/trigger'].post
+    description: >-
+      Mark the operation as money-moving and irreversible, and record the campaign
+      constraint the knowledge base states but the contract does not.
+    update:
+      x-agentic-access:
+        action_class: write
+        consequence: high
+        reversible: false
+        spends_money: true
+        ships_physical_goods: true
+        escalation: human-approval-recommended
+        note: >-
+          Set `approved: "false"` to create the send in a pending state for manual
+          review in the Reachdesk UI instead of dispatching immediately. This is the
+          only in-contract brake on an agent-initiated spend.
+      x-constraints:
+        - >-
+          Only MANUAL campaigns are accepted. Automated campaigns are rejected. Source
+          https://support.reachdesk.com/hc/en-gb/articles/29669486204305-Send-gifts-with-the-Reachdesk-Trigger-Campaign-API
+        - >-
+          Wallet selection falls back silently: if payment_wallet_type is Team and the
+          sender is not a member of team_name, the sender's own User wallet is debited
+          instead, with no error.
+      x-undeclared-errors:
+        note: >-
+          The provider declares ONLY a 200 on this operation. Live failures documented
+          in prose but absent from the contract include an invalid or automated
+          campaign, an unknown sender, and an unavailable funding wallet. Expect and
+          handle 4xx responses that the contract does not describe.
+  - target: $.paths['/bulk_sends'].post
+    update:
+      x-agentic-access:
+        action_class: write
+        consequence: high
+        reversible: false
+        spends_money: true
+        batch_limit: 5000
+        escalation: human-approval-required
+      x-async:
+        pattern: fire-and-poll
+        accepted_status: 202
+        returns: 'bulk send id only'
+        completion_signal: none
+        note: >-
+          No GET /bulk_sends/{id} exists and no completion event is published. The id
+          returned by the 202 cannot be looked up. Reconcile by polling GET /sends
+          over the relevant window.
+  - target: $.paths['/gdpr/requests'].post
+    update:
+      x-agentic-access:
+        action_class: write
+        consequence: high
+        reversible: false
+        note: >-
+          request_type "erase_subject" permanently deletes a data subject's records.
+          Never issue on an agent's own initiative.
+
+  # ---- 5. contract defects recorded, not silently repaired ----
+  - target: $.paths
+    description: >-
+      Record the malformed path key. It is NOT rewritten here: the original stays
+      verbatim, and a consumer needs to know the published contract contains it.
+    update:
+      x-defects:
+        - key: '/sends?start_date={start_date}&end_date={end_date}'
+          issue: >-
+            A query string is embedded in the path template. Not valid OpenAPI path
+            syntax; the real path is /sends and start_date/end_date are already
+            declared as query parameters on the same operation.
+          real_path: /sends
+        - key: '/transactions'
+          issue: >-
+            Declares a `page` parameter but no `per_page`, unlike the other two list
+            operations. Page size is not controllable or documented.
+        - scope: components
+          issue: >-
+            components.schemas is empty. The recipient object is redefined inline
+            three times and the person object twice; nothing is $ref'd.
+        - scope: responses
+          issue: >-
+            get-organization, list-contacts and list-transactions declare their 200
+            (and 400) bodies as empty objects with an example of "{}", so three of the
+            six read operations have no documented output shape.
+
+  # ---- 6. pagination and conventions cross-reference ----
+  - target: $
+    update:
+      x-conventions: conventions/reachdesk-conventions.yml
+      x-error-catalog: errors/reachdesk-problem-types.yml
+      x-data-model: data-model/reachdesk-data-model.yml
+      x-idempotency:
+        supported: unclear
+        field: request_id
+        note: >-
+          The contract asks for a unique request_id per request but never states what
+          a replay does. Treat retries of trigger-campaign and bulk_sends as
+          potentially duplicating a spend.
+      x-rate-limits:
+        documented: false
+        headers: none

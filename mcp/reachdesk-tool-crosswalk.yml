@@ -1,0 +1,114 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/reachdesk-api-openapi.yml (9 operations) +
+  mcp/reachdesk-mcp.yml (remote MCP endpoint, tools/list auth-gated) +
+  well-known/reachdesk-oauth-authorization-server.json (scopes_supported)
+description: >-
+  Crosswalk between the Reachdesk remote MCP surface and the Reachdesk REST API.
+  Reachdesk publishes BOTH — a 9-operation OpenAPI 3.1 contract at
+  https://app.reachdesk.com/api/v2 and a remote MCP server at
+  https://app.reachdesk.com/mcp — but the MCP tool list is behind OAuth, so no
+  tool names or inputSchemas could be read anonymously. This file therefore
+  records the REST side completely and the MCP side as an unresolved surface,
+  rather than inventing tool names to bind to. It is the honest shape of the
+  crosswalk until an authenticated tools/list can be run.
+
+surfaces:
+  openapi:
+    file: openapi/reachdesk-api-openapi.yml
+    original: openapi/_original/reachdesk-openapi-original.json
+    source: https://reachdesk.readme.io/openapi/605275c06991600049cc768e
+    base_url: https://app.reachdesk.com/api/v2
+    auth: Bearer API token in the Authorization header
+    gated: false
+    operation_count: 9
+  mcp:
+    url: https://app.reachdesk.com/mcp
+    auth: OAuth 2.1 (authorization_code / client_credentials, PKCE S256, DCR)
+    gated: true
+    gate_evidence: 'POST tools/list -> 401 Unauthorized: Invalid or missing authentication token'
+    tool_count: null
+    scopes:
+      - mcp:tools.user.read
+      - mcp:tools.user.write
+  graphql:
+    present: false
+
+crosswalk: []
+
+mcp_only: []
+
+rest_only:
+  - operation: trigger-campaign
+    method: POST
+    path: /campaigns/{id}/trigger
+    summary: Trigger Campaign
+    write: true
+    note: >-
+      The marquee write operation. If an MCP write tool exists it is most likely
+      backed by this operation, but that is an inference and no binding is
+      asserted.
+  - operation: bulk-create
+    method: POST
+    path: /bulk_sends
+    summary: Bulk Send
+    write: true
+  - operation: list-sends
+    method: GET
+    path: /sends
+    summary: List Sends
+    write: false
+  - operation: get-send
+    method: GET
+    path: /sends/{id}
+    summary: Get Send
+    write: false
+  - operation: list-contacts
+    method: GET
+    path: /contacts
+    summary: List Contacts
+    write: false
+  - operation: list-transactions
+    method: GET
+    path: /transactions
+    summary: List Transactions
+    write: false
+  - operation: get-organization
+    method: GET
+    path: /organization
+    summary: Get Organization
+    write: false
+  - operation: create-gdpr-request
+    method: POST
+    path: /gdpr/requests
+    summary: Create GDPR Request
+    write: true
+  - operation: get-gdpr-request
+    method: GET
+    path: /gdpr/requests/{id}
+    summary: Get GDPR Request
+    write: false
+    note: Marked "(Coming Soon)" in the provider's own description.
+
+coverage:
+  rest_operations: 9
+  mcp_tools: null
+  bound: 0
+  mcp_only: 0
+  rest_only: 9
+  resolvable: false
+  blocker: >-
+    MCP tools/list requires an OAuth bearer token. The crosswalk cannot be
+    completed without an authenticated introspection run against
+    https://app.reachdesk.com/mcp.
+
+notes:
+  - >-
+    The two scopes divide the tool surface into read and write, which lines up
+    with the REST split of 6 read operations and 3 write operations, but no
+    tool-to-operation binding is claimed on that basis.
+  - >-
+    Re-run this artifact after any authenticated tools/list. Every row added then
+    should carry confidence: high, because the inputSchema can be compared
+    directly against the OpenAPI requestBody.

@@ -1,0 +1,124 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/reachdesk-api-openapi.yml
+docs: https://reachdesk.readme.io/reference/trigger-campaign
+description: >-
+  Error catalogue for the Reachdesk REST API, derived from every 4xx response
+  declared in the provider's OpenAPI 3.1 contract. Reachdesk does NOT use RFC 9457
+  problem+json. It returns two different ad-hoc JSON envelopes depending on the
+  endpoint, and returns text/plain with no body at all for several auth and
+  validation failures. There is no published error-code registry: no numeric or
+  symbolic codes exist anywhere in the contract or the docs, so an agent can only
+  branch on the HTTP status.
+format: ad-hoc-json
+rfc9457: false
+content_types:
+  - application/json
+  - text/plain
+envelopes:
+  - name: error-string
+    shape: '{"error": "<message>"}'
+    used_by:
+      - get-send (404)
+    example: '{"error": "Send not found"}'
+  - name: message-string
+    shape: '{"message": "<message>"}'
+    used_by:
+      - bulk-create (400)
+    example: '{"message": "Parameter \"send_method\" must be \"link\" or \"email\""}'
+  - name: empty-object
+    shape: '{}'
+    used_by:
+      - get-organization (400)
+      - list-contacts (400)
+      - list-sends (400)
+      - list-transactions (400)
+    note: >-
+      The contract declares the 400 body as an empty object with no properties and
+      an example of "{}". Whatever the API actually returns on a bad request is
+      undocumented.
+  - name: none
+    shape: 'text/plain, no schema'
+    used_by:
+      - list-sends (401)
+      - bulk-create (401, 404, 422)
+    note: >-
+      Declared as text/plain with no schema and no example. An agent cannot parse
+      a reason out of these; only the status code carries meaning.
+problem_types:
+  - status: 400
+    title: Bad Request
+    operations:
+      - get-organization
+      - list-contacts
+      - list-sends
+      - list-transactions
+      - bulk-create
+    envelope: message-string (bulk-create) / empty-object (all others)
+    meaning: >-
+      Request parameters failed validation. On bulk-create the message names the
+      offending parameter; on the list endpoints the documented body is empty.
+    remediation: >-
+      Check query parameter types and enum values against the operation. On
+      bulk-create read `message`. On the list endpoints there is nothing to read —
+      re-check date formats (YYYY-MM-DD), page/per_page integers, and the array
+      filters (transaction_types[], states[], currencies[], campaign_types[],
+      team_ids[], user_ids[]).
+    retryable: false
+  - status: 401
+    title: Unauthorized
+    operations:
+      - list-sends
+      - get-send
+      - bulk-create
+    envelope: none (text/plain) on list-sends and bulk-create; empty example on get-send
+    meaning: >-
+      The Authorization header is missing, malformed, or carries a revoked or
+      invalid API token.
+    remediation: >-
+      Send `Authorization: Bearer {api_token}`. Regenerate the token under
+      Organization > Settings > API Tokens if it was revoked.
+    retryable: false
+  - status: 404
+    title: Not Found
+    operations:
+      - get-send
+      - bulk-create
+    envelope: error-string (get-send) / none (bulk-create)
+    example: '{"error": "Send not found"}'
+    meaning: >-
+      The referenced resource does not exist, or does not belong to the
+      organization the API token authenticates.
+    remediation: >-
+      Verify the send id or campaign_id. On bulk-create a 404 most likely means the
+      campaign_id is unknown to the organization or the sender has no access to it.
+    retryable: false
+  - status: 422
+    title: Unprocessable Entity
+    operations:
+      - bulk-create
+    envelope: none (text/plain)
+    meaning: >-
+      The bulk send payload is syntactically valid but semantically rejected. No
+      body schema, example or explanation is published.
+    remediation: >-
+      Re-check the required fields (request_id, campaign_id, sender, recipients),
+      the 5000-recipient ceiling, and that the campaign is a manual campaign — the
+      knowledge base states automated campaigns are not accepted by the trigger
+      API.
+    retryable: false
+undocumented:
+  - >-
+    trigger-campaign (POST /campaigns/{id}/trigger) declares ONLY a 200. No 400,
+    401, 403, 404 or 422 is modelled on the single most important write operation
+    in the API, even though the knowledge base documents several ways it can fail
+    (automated campaign rejected, wallet not found, invalid send).
+  - >-
+    create-gdpr-request and get-gdpr-request declare only a 200 each.
+  - No 429 is declared anywhere; rate-limit behaviour is entirely undocumented.
+  - No 5xx is declared anywhere.
+gaps:
+  - No RFC 9457 application/problem+json.
+  - No stable machine-readable error codes — only HTTP statuses and free-text prose.
+  - Two inconsistent JSON envelopes (`error` vs `message`) across the same API.
+  - Four responses declare text/plain with no schema.

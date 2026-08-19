@@ -1,0 +1,263 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/reachdesk-api-openapi.yml
+description: >-
+  Entity graph for the Reachdesk API, derived from the inline response schemas and
+  request bodies of the provider's OpenAPI 3.1 contract. The spec declares NO
+  components.schemas — every object is defined inline at the point of use and
+  nothing is $ref'd, so these entities are reconstructed from repeated inline
+  shapes and from the id-bearing fields that link them. Entity names are ours;
+  field names are the provider's.
+schema_reuse:
+  components_schemas: 0
+  refs_used: 0
+  note: >-
+    Zero reuse. The recipient object alone is redefined inline three times
+    (trigger-campaign request, bulk-create request, trigger-campaign response), and
+    the sender/created_by_user person shape twice more. Any change to a recipient
+    field has to be made in every copy.
+entities:
+  - name: Organization
+    description: The account the API token authenticates. The root of every other entity.
+    operations:
+      - get-organization
+    identified_by: implicit (derived from the API token)
+    fields_documented: false
+    note: >-
+      The 200 response schema for get-organization is declared as an empty object
+      with an example of "{}" — the operation exists but its response shape is
+      undocumented.
+  - name: Campaign
+    description: >-
+      A preconfigured gift program. Holds the gift itself — amount, bundle items,
+      note template, marketplace product, currency. The API never sets these; it
+      only triggers a campaign for recipients.
+    id_field: id (integer, int32)
+    operations:
+      - trigger-campaign (path id)
+      - bulk-create (campaign_id in body)
+    types:
+      - bundle
+      - gift_card
+      - marketplace
+      - note
+    constraints:
+      - Must be a MANUAL campaign. Automated campaigns are rejected by the trigger API.
+    note: >-
+      There is NO list-campaigns or get-campaign operation in the contract, even
+      though the knowledge base says "Listing campaigns" is available. A caller must
+      already know the campaign id — there is no documented way to discover it
+      through the API.
+  - name: Send
+    description: A single gift send to a single recipient, created by triggering a campaign.
+    id_field: id (integer)
+    operations:
+      - get-send
+      - list-sends
+      - trigger-campaign (returns one)
+    fields:
+      - id
+      - type (e.g. gift_card)
+      - status (e.g. processed)
+      - payment_currency
+      - payment_wallet_id
+      - packaging_notes
+      - claim_url (populated when send_method is `link`, otherwise null)
+      - custom_attributes[]
+      - created_by_user
+      - recipient
+      - sender
+      - gift_card {amount, currency}
+  - name: BulkSend
+    description: >-
+      An asynchronous batch of sends. Accepts up to 5000 recipients and returns
+      only an id; the individual Sends are created in the background.
+    id_field: id (integer)
+    operations:
+      - bulk-create
+    note: >-
+      Write-only in the contract. There is no GET /bulk_sends/{id}, so the id
+      returned by the 202 cannot be used to look anything up.
+  - name: Recipient
+    description: The person a gift is sent to. Embedded in Send, never addressable on its own.
+    fields:
+      - first_name
+      - last_name
+      - email
+      - company_name
+      - street_address_1
+      - street_address_2
+      - city
+      - state
+      - zipcode
+      - country (ISO 3166 alpha-2)
+      - phone_number
+      - role
+      - tax_id
+      - provider
+      - provider_contact_id
+      - provider_contact_type
+  - name: User
+    description: >-
+      A Reachdesk platform user. Appears as `sender` and `created_by_user` on a
+      Send, and as the identity a send is made on behalf of.
+    identified_by: email
+    fields:
+      - first_name
+      - last_name
+      - email
+    operations:
+      - filter only (user_ids[] on list-transactions)
+  - name: Team
+    description: >-
+      A grouping of users that owns wallets and budgets. Referenced by name when
+      routing payment and by id when filtering transactions.
+    identified_by: team_name (string) on sends, team_ids[] (integer) on transactions
+    note: >-
+      Inconsistent identity — the write path addresses a team by NAME, the read path
+      filters by ID, and no operation maps one to the other.
+  - name: Wallet
+    description: >-
+      The funding source debited by a send. Either a User wallet or a Team wallet,
+      always in one currency. Created automatically when it does not exist.
+    id_field: payment_wallet_id (integer, on the Send response)
+    types:
+      - User
+      - Team
+    currencies:
+      - AUD
+      - CAD
+      - DKK
+      - EUR
+      - GBP
+      - INR
+      - NOK
+      - SEK
+      - USD
+    note: >-
+      Wallets are not addressable — there is no list-wallets or get-wallet
+      operation. Their existence is only visible through payment_wallet_id on a Send
+      and through Transactions.
+  - name: Transaction
+    description: A movement of money in the Reachdesk ledger.
+    operations:
+      - list-transactions
+    types:
+      - balance_allocation
+      - (further values listed in the transaction_types[] parameter description)
+    states:
+      - cancelled
+      - pending
+      - processed
+    dimensions:
+      - currency (ISO 4217)
+      - campaign_type (bundle, gift_card, marketplace)
+      - team
+      - user
+  - name: Contact
+    description: A person known to the organization, filterable by company name.
+    operations:
+      - list-contacts
+    filters:
+      - account_name
+    note: Response shape undocumented (declared as an empty object).
+  - name: GdprRequest
+    description: >-
+      A data-subject erasure or export request, keyed by the subject's email
+      address.
+    id_field: id (integer)
+    operations:
+      - create-gdpr-request
+      - get-gdpr-request (marked "Coming Soon" by the provider)
+    fields:
+      - request.request_type (erase_subject | export_subject)
+      - request.subject (email address)
+  - name: CustomAttribute
+    description: >-
+      A name/value pair supplied at trigger time and interpolated into campaign
+      templates as {{name}}. Names use underscores instead of spaces.
+    fields:
+      - name
+      - value
+  - name: Item
+    description: >-
+      A line in a bundle campaign, addressed by SKU with a quantity inside the range
+      the campaign allows.
+    fields:
+      - sku
+      - quantity
+relationships:
+  - from: Organization
+    to: Campaign
+    type: has_many
+    via: implicit (API token scope)
+  - from: Campaign
+    to: Send
+    type: has_many
+    via: trigger-campaign / bulk-create
+  - from: BulkSend
+    to: Send
+    type: has_many
+    via: asynchronous background creation (no documented link field)
+  - from: Send
+    to: Recipient
+    type: has_one
+    via: recipient (embedded)
+  - from: Send
+    to: User
+    type: belongs_to
+    via: sender (email) and created_by_user
+  - from: Send
+    to: Wallet
+    type: belongs_to
+    via: payment_wallet_id
+  - from: Send
+    to: CustomAttribute
+    type: has_many
+    via: custom_attributes[]
+  - from: Send
+    to: Item
+    type: has_many
+    via: items[] (bundle campaigns only)
+  - from: Wallet
+    to: User
+    type: belongs_to
+    via: payment_wallet_type=User
+  - from: Wallet
+    to: Team
+    type: belongs_to
+    via: payment_wallet_type=Team + team_name
+  - from: Team
+    to: User
+    type: has_many
+    via: team membership (not exposed in the API)
+  - from: Transaction
+    to: Team
+    type: belongs_to
+    via: team_ids[] filter
+  - from: Transaction
+    to: User
+    type: belongs_to
+    via: user_ids[] filter
+  - from: Organization
+    to: Contact
+    type: has_many
+    via: list-contacts
+  - from: Organization
+    to: GdprRequest
+    type: has_many
+    via: create-gdpr-request
+id_conventions:
+  style: bare integers (int32)
+  prefixed_ids: false
+  note: >-
+    No prefixed or typed ids. A send id and a campaign id are both plain integers
+    and are indistinguishable from each other in a payload.
+gaps:
+  - No Campaign read operations despite campaigns being the required input to every send.
+  - No Wallet read operations despite wallets being what the API spends.
+  - No BulkSend read operation.
+  - Team addressed by name on write and by id on read, with no mapping operation.
+  - >-
+    Response schemas for Organization, Contact and Transaction are declared as empty
+    objects, so three of the six read operations have no documented output shape.

@@ -1,0 +1,71 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://reachdesk.readme.io/reference/authentication +
+  https://support.reachdesk.com/hc/en-gb/sections/42445556644497-2026-Releases +
+  live probe of status.reachdesk.com
+description: >-
+  Lifecycle posture for the Reachdesk API. Reachdesk versions its API in the URI
+  path (v2) and publishes a monthly, dated product release-notes series that
+  regularly names API changes. It publishes no deprecation policy, no sunset
+  policy, no SLA and no status page — status.reachdesk.com does not resolve.
+
+versioning:
+  scheme: uri-path
+  current_version: v2
+  base_url: https://app.reachdesk.com/api/v2
+  info_version: '1.0'
+  policy_published: false
+  note: >-
+    No document explains how versions are introduced or retired, and no v1 is
+    documented anywhere public.
+
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  advance_notice: undocumented
+  note: >-
+    No operation in the OpenAPI carries `deprecated: true`. One operation
+    (get-gdpr-request) is marked "(Coming Soon)" in its own description, which is
+    the inverse problem — a published operation that is not yet live.
+
+status_page:
+  present: false
+  url: null
+  probe:
+    - url: https://status.reachdesk.com
+      result: DNS NXDOMAIN — host does not resolve
+      checked: '2026-08-13'
+  note: >-
+    No status page, uptime history or incident feed was found on any Reachdesk
+    host or on the common third-party status providers reachable from the
+    Reachdesk site.
+
+sla:
+  published: false
+  note: >-
+    The pricing page advertises a commercial "5x ROI guarantee" on pipeline, which
+    is a marketing guarantee and not an availability or latency SLA. SLA support is
+    listed as a Premium-plan feature but no terms are published.
+
+changelog:
+  present: true
+  style: monthly dated release notes in the knowledge base
+  url: https://support.reachdesk.com/hc/en-gb/sections/42445556644497-2026-Releases
+  detail: changelog/reachdesk-changelog.yml
+  api_changes_announced: true
+
+support:
+  channel: https://support.reachdesk.com/hc/en-gb
+  email: support@reachdesk.com
+
+gaps:
+  - No status page.
+  - No deprecation or sunset policy, and no Deprecation/Sunset response headers.
+  - No published SLA or uptime commitment.
+  - >-
+    API changes are announced in a general product release-notes stream aimed at
+    platform users, not in a developer-facing changelog on the API reference site.

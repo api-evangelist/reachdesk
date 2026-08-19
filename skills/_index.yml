@@ -1,0 +1,93 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  openapi/reachdesk-api-openapi.yml + conventions/reachdesk-conventions.yml +
+  errors/reachdesk-problem-types.yml + data-model/reachdesk-data-model.yml
+description: >-
+  Packaged Agent Skills for the Reachdesk API. Every skill is grounded in real
+  operationIds from the provider's published OpenAPI 3.1 contract — nothing here
+  names an operation that does not exist in the spec. Reachdesk publishes no
+  skills, AGENTS.md or agent instructions of its own; these are API Evangelist
+  generations from the contract and the provider's own documentation.
+api: reachdesk:reachdesk-api
+base_url: https://app.reachdesk.com/api/v2
+skill_count: 4
+skills:
+  - name: reachdesk-send-a-gift
+    file: skills/reachdesk-send-a-gift.md
+    summary: >-
+      Trigger a single gift send from a manual campaign, route the charge to the
+      right wallet, and choose immediate dispatch vs held-for-approval.
+    operations:
+      - trigger-campaign
+      - get-send
+    consequence: high
+    spends_money: true
+  - name: reachdesk-bulk-send
+    file: skills/reachdesk-bulk-send.md
+    summary: >-
+      Send one campaign to up to 5000 recipients asynchronously, then reconcile the
+      resulting sends — there is no bulk status endpoint and no completion event.
+    operations:
+      - bulk-create
+      - list-sends
+      - get-send
+    consequence: high
+    spends_money: true
+  - name: reachdesk-reconcile-spend
+    file: skills/reachdesk-reconcile-spend.md
+    summary: >-
+      Read-only reporting flow: enumerate sends over a window, pull send detail,
+      and reconcile against the transaction ledger by team, user, currency and
+      campaign type.
+    operations:
+      - get-organization
+      - list-sends
+      - get-send
+      - list-transactions
+      - list-contacts
+    consequence: low
+    spends_money: false
+  - name: reachdesk-gdpr-request
+    file: skills/reachdesk-gdpr-request.md
+    summary: >-
+      File a data-subject erasure or export request keyed by email, and work around
+      the status endpoint the provider marks "Coming Soon".
+    operations:
+      - create-gdpr-request
+      - get-gdpr-request
+    consequence: high
+    spends_money: false
+    irreversible: true
+operations_covered:
+  - trigger-campaign
+  - bulk-create
+  - list-sends
+  - get-send
+  - list-contacts
+  - list-transactions
+  - get-organization
+  - create-gdpr-request
+  - get-gdpr-request
+coverage: 9/9 operations
+cross_cutting_rules_embedded:
+  - >-
+    Retry safety — `request_id` is required but its replay semantics are
+    undocumented, so no skill blind-retries a write.
+  - >-
+    Approval mode — every send skill states what `approved: "false"` does, because
+    it is the only in-contract brake on an agent-initiated spend.
+  - >-
+    Wallet fallback — the silent fall-back from a Team wallet to the sender's User
+    wallet is called out wherever payment routing appears.
+  - >-
+    Error handling — skills state which responses carry no body at all, so an agent
+    does not try to parse one.
+  - >-
+    Polling — every skill notes that Reachdesk publishes no outbound webhooks or
+    events, so status is only observable by polling.
+notes:
+  - >-
+    Reachdesk also runs a remote MCP server at https://app.reachdesk.com/mcp, but
+    its tool list is OAuth-gated and could not be read, so no skill is written
+    against MCP tools. See mcp/reachdesk-tool-crosswalk.yml.

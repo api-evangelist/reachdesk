@@ -1,0 +1,122 @@
+generated: '2026-08-13'
+method: probed
+status: published
+source: >-
+  https://app.reachdesk.com/mcp — POST tools/list returned HTTP 401 with
+  WWW-Authenticate: Bearer realm="MCP",
+  resource_metadata="http://app.reachdesk.com/.well-known/oauth-protected-resource";
+  the referenced RFC 9728 document and the RFC 8414 authorization-server metadata
+  both return 200 and declare the mcp:tools.user.read / mcp:tools.user.write scopes.
+description: >-
+  Reachdesk operates a first-party remote MCP server on its own API host. It is a
+  hosted HTTP endpoint an MCP client POSTs to directly — there is no npx/stdio
+  package to install. Access is OAuth 2.1: the server advertises dynamic client
+  registration (RFC 7591), PKCE S256 and two MCP tool scopes. The tool list is
+  auth-gated, so the tool names and inputSchemas below could not be read
+  anonymously and are NOT recorded here.
+
+deployment:
+  mode: remote
+  endpoint: https://app.reachdesk.com/mcp
+  auth: oauth
+  verified: probed
+
+server:
+  name: reachdesk
+  transport: http
+  url: https://app.reachdesk.com/mcp
+  host: app.reachdesk.com
+  realm: MCP
+  protocol_probe:
+    method: tools/list
+    http_status: 401
+    body: >-
+      {"jsonrpc":"2.0","error":{"code":-32000,"message":"Unauthorized: Invalid or
+      missing authentication token"},"id":1}
+    note: >-
+      A JSON-RPC 2.0 error envelope with an MCP-shaped code is itself evidence the
+      endpoint speaks MCP — a catch-all route would return HTML or a generic 404.
+      POST /api/mcp, /sse and /v1/mcp on the same host return a plain
+      {"status":404,"error":"Not Found"}, which confirms /mcp is a real mounted
+      route rather than a wildcard.
+
+auth:
+  methods:
+    - oauth2
+  oauth2:
+    authorization_server: https://app.reachdesk.com
+    issuer: https://app.reachdesk.com
+    authorization_endpoint: https://app.reachdesk.com/oauth/authorize
+    token_endpoint: https://app.reachdesk.com/oauth/token
+    registration_endpoint: https://app.reachdesk.com/oauth/register
+    dynamic_client_registration: true
+    client_id_metadata_document_supported: true
+    pkce: S256
+    response_types_supported:
+      - code
+    grant_types_supported:
+      - authorization_code
+      - client_credentials
+      - refresh_token
+    token_endpoint_auth_methods_supported:
+      - client_secret_basic
+      - client_secret_post
+      - none
+    scopes_supported:
+      - mcp:tools.user.read
+      - mcp:tools.user.write
+    bearer_methods_supported:
+      - header
+    discovery:
+      authorization_server: well-known/reachdesk-oauth-authorization-server.json
+      protected_resource: well-known/reachdesk-oauth-protected-resource.json
+
+tools:
+  status: auth-gated
+  tool_count: null
+  note: >-
+    tools/list requires an OAuth bearer token. No anonymous tool manifest is
+    published, and neither llms.txt (www.reachdesk.com or reachdesk.readme.io) nor
+    the Reachdesk knowledge base documents the tool names. Nothing is listed here
+    rather than guessing — the scope names mcp:tools.user.read and
+    mcp:tools.user.write are the only public signal about the tool surface, and
+    they say only that the server exposes both read and write tools scoped to the
+    calling user.
+  inferred_shape:
+    read_scope: mcp:tools.user.read
+    write_scope: mcp:tools.user.write
+    note: >-
+      The user-scoped naming implies tools act on behalf of the authenticated
+      Reachdesk user (the same identity model the REST API's `sender` field uses),
+      not on behalf of the whole organization.
+
+related_ai_surface:
+  - name: Gifty
+    kind: in-product AI agent
+    description: >-
+      Reachdesk's own AI gifting agent, announced in the February 2026 release
+      notes and available to organizations with AI enabled. It searches the
+      Reachdesk marketplace and Amazon catalog for gift recommendations. It is a
+      product feature inside the Reachdesk app, not an MCP surface.
+    source: https://support.reachdesk.com/hc/en-gb/articles/44006193079057-Using-Gifty-by-Reachdesk-for-AI-gift-recommendations
+
+third_party_servers:
+  - vendor: Zapier
+    url: https://zapier.com/mcp/reachdesk
+    note: >-
+      A Zapier-hosted MCP proxy that wraps Reachdesk's Zapier integration. NOT
+      operated by Reachdesk and not counted as a Reachdesk agent surface.
+  - vendor: viaSocket
+    url: https://viasocket.com/mcp/reachdesk
+    note: Third-party MCP proxy. NOT operated by Reachdesk.
+
+notes:
+  - >-
+    Reachdesk does not document the MCP server anywhere in its public knowledge
+    base or ReadMe API reference as of 2026-08-13 — it was found only by probing
+    the API host. The OAuth metadata is the provider's own published assertion
+    that the server exists.
+  - >-
+    mode is `remote`, not `both`: no npm/PyPI package, no npx install command and
+    no stdio configuration snippet exists on any Reachdesk surface or in any public
+    registry.
