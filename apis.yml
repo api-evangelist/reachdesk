@@ -98,6 +98,11 @@ apis:
       - MCP
       - AI Agents
       - Gifting
+      - Authentication
+    tags_raw:
+      - MCP
+      - AI Agents
+      - Gifting
       - OAuth
     properties:
       - type: MCPServer
