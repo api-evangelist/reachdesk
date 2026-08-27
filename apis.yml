@@ -41,78 +41,231 @@ tags:
   - AI Agents
   - OpenAPI
 apis:
-  - aid: reachdesk:reachdesk-api
-    name: Reachdesk API
-    description: >-
-      The Reachdesk REST API enables programmatic triggering of gift campaigns
-      and sending of physical gifts, branded merchandise, and digital rewards.
-      Authenticated via API tokens generated in the Reachdesk platform settings,
-      the API integrates with CRM and marketing automation workflows to automate
-      gifting as part of sales and customer success programs. The contract is
-      published as OpenAPI 3.1 and declares 9 operations across sends, contacts,
-      transactions, organization and GDPR data-subject requests, based at
-      https://app.reachdesk.com/api/v2.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
-    baseURL: https://app.reachdesk.com/api/v2
-    tags:
-      - Gifts
-      - Campaigns
-      - Direct Mail
-      - Swag
-      - Rewards
-    properties:
-      - type: OpenAPI
-        url: openapi/reachdesk-api-openapi.yml
-      - type: Overlay
-        url: overlays/reachdesk-api-overlay.yaml
-      - type: Documentation
-        url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
-      - type: APIReference
-        url: https://reachdesk.readme.io/reference/authentication
-      - type: APISection
-        url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
-      - type: Authentication
-        url: authentication/reachdesk-authentication.yml
-      - type: ErrorCatalog
-        url: errors/reachdesk-problem-types.yml
-      - type: Conventions
-        url: conventions/reachdesk-conventions.yml
-      - type: DataModel
-        url: data-model/reachdesk-data-model.yml
-  - aid: reachdesk:reachdesk-mcp
-    name: Reachdesk MCP Server
-    description: >-
-      Reachdesk operates a first-party remote Model Context Protocol server at
-      https://app.reachdesk.com/mcp, on the same host as its REST API. It is a
-      hosted HTTP endpoint an MCP client POSTs to directly — there is no stdio
-      package to install. Access is OAuth 2.1 with dynamic client registration
-      (RFC 7591), PKCE S256, and two published scopes, mcp:tools.user.read and
-      mcp:tools.user.write, which scope tools to the authenticated Reachdesk user.
-      The server is undocumented in Reachdesk's knowledge base and API reference;
-      it was found by probing the API host, and the tool list is auth-gated.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://reachdesk.readme.io/
-    baseURL: https://app.reachdesk.com/mcp
-    tags:
-      - MCP
-      - AI Agents
-      - Gifting
-      - Authentication
-    tags_raw:
-      - MCP
-      - AI Agents
-      - Gifting
-      - OAuth
-    properties:
-      - type: MCPServer
-        url: mcp/reachdesk-mcp.yml
-      - type: ToolCrosswalk
-        url: mcp/reachdesk-tool-crosswalk.yml
-      - type: OAuthScopes
-        url: scopes/reachdesk-scopes.yml
-      - type: WellKnown
-        url: well-known/reachdesk-well-known.yml
+- aid: reachdesk:reachdesk-mcp
+  name: Reachdesk MCP Server
+  description: >-
+    Reachdesk operates a first-party remote Model Context Protocol server at https://app.reachdesk.com/mcp,
+    on the same host as its REST API. It is a hosted HTTP endpoint an MCP client POSTs to directly — there
+    is no stdio package to install. Access is OAuth 2.1 with dynamic client registration (RFC 7591), PKCE
+    S256, and two published scopes, mcp:tools.user.read and mcp:tools.user.write, which scope tools to
+    the authenticated Reachdesk user. The server is undocumented in Reachdesk's knowledge base and API
+    reference; it was found by probing the API host, and the tool list is auth-gated.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://reachdesk.readme.io/
+  baseURL: https://app.reachdesk.com/mcp
+  tags:
+  - MCP
+  - AI Agents
+  - Gifting
+  - Authentication
+  tags_raw:
+  - MCP
+  - AI Agents
+  - Gifting
+  - OAuth
+  properties:
+  - type: MCPServer
+    url: mcp/reachdesk-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/reachdesk-tool-crosswalk.yml
+  - type: OAuthScopes
+    url: scopes/reachdesk-scopes.yml
+  - type: WellKnown
+    url: well-known/reachdesk-well-known.yml
+- aid: reachdesk:reachdesk-bulk-sends-api
+  name: Reachdesk Bulk Sends API
+  description: The Bulk Sends API from Reachdesk — 1 operation(s) for bulk sends.
+  humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  baseURL: https://app.reachdesk.com/api/v2
+  tags:
+  - Bulk Sends
+  properties:
+  - type: OpenAPI
+    url: openapi/reachdesk-bulk-sends-api-openapi.yml
+  - type: Documentation
+    url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  - type: APIReference
+    url: https://reachdesk.readme.io/reference/authentication
+  - type: APISection
+    url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+  - type: Authentication
+    url: authentication/reachdesk-authentication.yml
+  - type: ErrorCatalog
+    url: errors/reachdesk-problem-types.yml
+  - type: Conventions
+    url: conventions/reachdesk-conventions.yml
+  - type: DataModel
+    url: data-model/reachdesk-data-model.yml
+- aid: reachdesk:reachdesk-campaigns-api
+  name: Reachdesk Campaigns API
+  description: The Campaigns API from Reachdesk — 1 operation(s) for campaigns.
+  humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  baseURL: https://app.reachdesk.com/api/v2
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/reachdesk-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  - type: APIReference
+    url: https://reachdesk.readme.io/reference/authentication
+  - type: APISection
+    url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+  - type: Authentication
+    url: authentication/reachdesk-authentication.yml
+  - type: ErrorCatalog
+    url: errors/reachdesk-problem-types.yml
+  - type: Conventions
+    url: conventions/reachdesk-conventions.yml
+  - type: DataModel
+    url: data-model/reachdesk-data-model.yml
+- aid: reachdesk:reachdesk-contacts-api
+  name: Reachdesk Contacts API
+  description: The Contacts API from Reachdesk — 1 operation(s) for contacts.
+  humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  baseURL: https://app.reachdesk.com/api/v2
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/reachdesk-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  - type: APIReference
+    url: https://reachdesk.readme.io/reference/authentication
+  - type: APISection
+    url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+  - type: Authentication
+    url: authentication/reachdesk-authentication.yml
+  - type: ErrorCatalog
+    url: errors/reachdesk-problem-types.yml
+  - type: Conventions
+    url: conventions/reachdesk-conventions.yml
+  - type: DataModel
+    url: data-model/reachdesk-data-model.yml
+- aid: reachdesk:reachdesk-gdpr-api
+  name: Reachdesk Gdpr API
+  description: The Gdpr API from Reachdesk — 2 operation(s) for gdpr.
+  humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  baseURL: https://app.reachdesk.com/api/v2
+  tags:
+  - Gdpr
+  properties:
+  - type: OpenAPI
+    url: openapi/reachdesk-gdpr-api-openapi.yml
+  - type: Documentation
+    url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  - type: APIReference
+    url: https://reachdesk.readme.io/reference/authentication
+  - type: APISection
+    url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+  - type: Authentication
+    url: authentication/reachdesk-authentication.yml
+  - type: ErrorCatalog
+    url: errors/reachdesk-problem-types.yml
+  - type: Conventions
+    url: conventions/reachdesk-conventions.yml
+  - type: DataModel
+    url: data-model/reachdesk-data-model.yml
+- aid: reachdesk:reachdesk-organization-api
+  name: Reachdesk Organization API
+  description: The Organization API from Reachdesk — 1 operation(s) for organization.
+  humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  baseURL: https://app.reachdesk.com/api/v2
+  tags:
+  - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/reachdesk-organization-api-openapi.yml
+  - type: Documentation
+    url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  - type: APIReference
+    url: https://reachdesk.readme.io/reference/authentication
+  - type: APISection
+    url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+  - type: Authentication
+    url: authentication/reachdesk-authentication.yml
+  - type: ErrorCatalog
+    url: errors/reachdesk-problem-types.yml
+  - type: Conventions
+    url: conventions/reachdesk-conventions.yml
+  - type: DataModel
+    url: data-model/reachdesk-data-model.yml
+- aid: reachdesk:reachdesk-sends-api
+  name: Reachdesk Sends API
+  description: The Sends API from Reachdesk — 1 operation(s) for sends.
+  humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  baseURL: https://app.reachdesk.com/api/v2
+  tags:
+  - Sends
+  properties:
+  - type: OpenAPI
+    url: openapi/reachdesk-sends-api-openapi.yml
+  - type: Documentation
+    url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  - type: APIReference
+    url: https://reachdesk.readme.io/reference/authentication
+  - type: APISection
+    url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+  - type: Authentication
+    url: authentication/reachdesk-authentication.yml
+  - type: ErrorCatalog
+    url: errors/reachdesk-problem-types.yml
+  - type: Conventions
+    url: conventions/reachdesk-conventions.yml
+  - type: DataModel
+    url: data-model/reachdesk-data-model.yml
+- aid: reachdesk:reachdesk-sends-start-date-start-date-end-date-end-date-api
+  name: Reachdesk Sends?start Date={start Date}&end Date={end Date} API
+  description: >-
+    The Sends?start Date={start Date}&end Date={end Date} API from Reachdesk — 1 operation(s) for sends?start
+    date={start date}&end date={end date}.
+  humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  baseURL: https://app.reachdesk.com/api/v2
+  tags:
+  - Sends?start Date={start Date}&end Date={end Date}
+  properties:
+  - type: OpenAPI
+    url: openapi/reachdesk-sends-start-date-start-date-end-date-end-date-api-openapi.yml
+  - type: Documentation
+    url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  - type: APIReference
+    url: https://reachdesk.readme.io/reference/authentication
+  - type: APISection
+    url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+  - type: Authentication
+    url: authentication/reachdesk-authentication.yml
+  - type: ErrorCatalog
+    url: errors/reachdesk-problem-types.yml
+  - type: Conventions
+    url: conventions/reachdesk-conventions.yml
+  - type: DataModel
+    url: data-model/reachdesk-data-model.yml
+- aid: reachdesk:reachdesk-transactions-api
+  name: Reachdesk Transactions API
+  description: The Transactions API from Reachdesk — 1 operation(s) for transactions.
+  humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  baseURL: https://app.reachdesk.com/api/v2
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/reachdesk-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
+  - type: APIReference
+    url: https://reachdesk.readme.io/reference/authentication
+  - type: APISection
+    url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
+  - type: Authentication
+    url: authentication/reachdesk-authentication.yml
+  - type: ErrorCatalog
+    url: errors/reachdesk-problem-types.yml
+  - type: Conventions
+    url: conventions/reachdesk-conventions.yml
+  - type: DataModel
+    url: data-model/reachdesk-data-model.yml
 common:
   - type: Authentication
     url: authentication/reachdesk-authentication.yml
