@@ -9,6 +9,18 @@ description: >-
   countries. API tokens are generated via the platform settings and used to
   authenticate requests for campaign triggering and gift delivery operations.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: unknown
