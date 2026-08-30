@@ -1,0 +1,200 @@
+openapi: 3.2.0
+info:
+  title: Reachdesk Sends API
+  version: '1.0'
+servers:
+- url: https://app.reachdesk.com/api/v2
+security:
+- sec0: []
+tags:
+- name: Sends
+paths:
+  /sends/{id}:
+    get:
+      summary: Get Send
+      description: Retrieves a single send
+      operationId: get-send
+      parameters:
+      - name: id
+        in: path
+        description: Unique identifier of the send
+        schema:
+          type: integer
+          format: int32
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": {\n    \"id\": 12345,\n    \"type\": \"bundle\",\n    \"email\": \"recipient@example.com\",\n    \"status\": \"processed\",\n    \"latest_action\": null,\n    \"processed_at\": \"2024-03-03T12:35:00.000Z\",\n    \"created_at\": \"2024-03-01T09:00:00.000Z\",\n    \"send_updated_date\": \"2024-03-03T12:35:00.000Z\",\n    \"gift_name\": null,\n    \"campaign\": {\n      \"id\": 678,\n      \"name\": \"Q1 Prospecting\"\n    },\n    \"cost\": {\n      \"amount\": 6.5,\n      \"original_amount\": 6.5,\n      \"currency\": \"GBP\",\n      \"original_currency\": \"GBP\",\n      \"display\": \"6.50 GBP\",\n      \"original_display\": \"6.50 GBP\",\n      \"state\": \"processed\"\n    },\n    \"team_name\": null,\n    \"order\": {\n      \"id\": 987,\n      \"order_number\": \"RD-000987\",\n      \"tracking_code\": \"1234\",\n      \"tracking_url\": \"https://shipments.reachdesk.com/1234\",\n      \"status\": 350,\n      \"shipped_at\": \"2024-03-02T10:05:00.000Z\",\n      \"shipment\": {\n        \"id\": 456,\n        \"provider_id\": \"prov_123\",\n        \"provider_sub_status_message\": \"In transit\",\n        \"courier\": \"dhl\",\n        \"tracking_number\": \"1234\",\n        \"tracking_url\": \"https://shipments.reachdesk.com/1234\"\n      }\n    },\n    \"total_items_cost\": \"70.0\",\n    \"engage_items\": [\n      {\n        \"name\": \"Branded Hoodie\",\n        \"quantity\": 1\n      },\n      {\n        \"name\": \"Reusable Bottle\",\n        \"quantity\": 7\n      }\n    ]\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 12345
+                        default: 0
+                      type:
+                        type: string
+                        example: bundle
+                      email:
+                        type: string
+                        example: recipient@example.com
+                      status:
+                        type: string
+                        example: processed
+                      latest_action: {}
+                      processed_at:
+                        type: string
+                        example: '2024-03-03T12:35:00.000Z'
+                      created_at:
+                        type: string
+                        example: '2024-03-01T09:00:00.000Z'
+                      send_updated_date:
+                        type: string
+                        example: '2024-03-03T12:35:00.000Z'
+                      gift_name: {}
+                      campaign:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 678
+                            default: 0
+                          name:
+                            type: string
+                            example: Q1 Prospecting
+                      cost:
+                        type: object
+                        properties:
+                          amount:
+                            type: number
+                            example: 6.5
+                            default: 0
+                          original_amount:
+                            type: number
+                            example: 6.5
+                            default: 0
+                          currency:
+                            type: string
+                            example: GBP
+                          original_currency:
+                            type: string
+                            example: GBP
+                          display:
+                            type: string
+                            example: 6.50 GBP
+                          original_display:
+                            type: string
+                            example: 6.50 GBP
+                          state:
+                            type: string
+                            example: processed
+                      team_name: {}
+                      order:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 987
+                            default: 0
+                          order_number:
+                            type: string
+                            example: RD-000987
+                          tracking_code:
+                            type: string
+                            example: '1234'
+                          tracking_url:
+                            type: string
+                            example: https://shipments.reachdesk.com/1234
+                          status:
+                            type: integer
+                            example: 350
+                            default: 0
+                          shipped_at:
+                            type: string
+                            example: '2024-03-02T10:05:00.000Z'
+                          shipment:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 456
+                                default: 0
+                              provider_id:
+                                type: string
+                                example: prov_123
+                              provider_sub_status_message:
+                                type: string
+                                example: In transit
+                              courier:
+                                type: string
+                                example: dhl
+                              tracking_number:
+                                type: string
+                                example: '1234'
+                              tracking_url:
+                                type: string
+                                example: https://shipments.reachdesk.com/1234
+                      total_items_cost:
+                        type: string
+                        example: '70.0'
+                      engage_items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: Branded Hoodie
+                            quantity:
+                              type: integer
+                              example: 1
+                              default: 0
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": \"Send not found\"\n}"
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Send not found
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl --request GET \\\n  --url https://app.reachdesk.com/api/v2/sends/12345 \\\n  --header 'Authorization: Bearer <YOUR_API_TOKEN>' \\\n  --header 'Accept: application/json'"
+        samples-languages:
+        - curl
+      tags:
+      - Sends
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

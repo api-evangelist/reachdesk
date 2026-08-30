@@ -1,0 +1,306 @@
+openapi: 3.2.0
+info:
+  title: Reachdesk Campaigns API
+  version: '1.0'
+servers:
+- url: https://app.reachdesk.com/api/v2
+security:
+- sec0: []
+tags:
+- name: Campaigns
+paths:
+  /campaigns/{id}/trigger:
+    post:
+      summary: Trigger Campaign
+      description: Trigger a gift send from a campaign.
+      operationId: trigger-campaign
+      parameters:
+      - name: id
+        in: path
+        description: ID of the campaign being triggered
+        schema:
+          type: integer
+          format: int32
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                request_id:
+                  type: string
+                  description: Random uniquely identifier generated for each request
+                source:
+                  type: string
+                  description: Name of the source of the trigger
+                recipient:
+                  type: object
+                  description: Information about the recipient
+                  properties:
+                    provider:
+                      type: string
+                      description: Source of the contact (optional)
+                      enum:
+                      - salesforce
+                      - msdynamics
+                      - hubspotcrm
+                      - salesloft
+                      - influitive
+                      - marketo
+                      - hibob
+                      - outreach
+                    provider_contact_id:
+                      type: string
+                      description: ID of the contact in the source system (optional)
+                    provider_contact_type:
+                      type: string
+                      description: Type of contact in the source system (optional)
+                      enum:
+                      - contact
+                      - lead
+                      - employee
+                    first_name:
+                      type: string
+                      description: First name of the recipient
+                    last_name:
+                      type: string
+                      description: Last name of the recipient
+                    email:
+                      type: string
+                      description: Email of the recipient
+                    company_name:
+                      type: string
+                      description: Name of the recipient's company
+                    street_address_1:
+                      type: string
+                      description: First line of the recipient's address (only used in physical sends)
+                    street_address_2:
+                      type: string
+                      description: Second line of the recipient's address (only used in physical sends)
+                    city:
+                      type: string
+                      description: Recipient's city
+                    state:
+                      type: string
+                      description: Recipient's state
+                    zipcode:
+                      type: string
+                      description: Recipient's zipcode/post code
+                    country:
+                      type: string
+                      description: Recipient's 2-letter country code (ISO 3166), e.g. US
+                    phone_number:
+                      type: string
+                      description: Recipient's phone number
+                    role:
+                      type: string
+                      description: Recipient's role
+                    tax_id:
+                      type: string
+                      description: Recipient's Tax Id
+                sender:
+                  type: string
+                  description: Email of the sender (must be a user in the platform)
+                payment_currency:
+                  type: string
+                  description: What currency should be used when paying for the send (by default, it will use the currency set in the campaign)
+                  enum:
+                  - AUD
+                  - CAD
+                  - DKK
+                  - EUR
+                  - GBP
+                  - INR
+                  - NOK
+                  - SEK
+                  - USD
+                items:
+                  type: array
+                  description: (Only for bundles) List of quantities for the different items in the campaign - not mandatory, defaults to the minimum in each item
+                  items:
+                    properties:
+                      sku:
+                        type: string
+                        description: SKU of item that the quantity will be defined (must be within the campaign)
+                      quantity:
+                        type: integer
+                        description: Desired quantity (must be within the range set in the campaign, defaults to the minimum)
+                        format: int32
+                    type: object
+                approved:
+                  type: string
+                  description: If "true", the send will be automatically processed and, if invalid, an error will be returned by the API. If "false", the send will be created in a pending state for manual review; if "auto", it will try to approve automatically, unless invalid, in which case it will be created as pending for manual review
+                  enum:
+                  - 'true'
+                  - 'false'
+                  - auto
+                payment_wallet_type:
+                  type: string
+                  description: This determines what type of payment wallet to use for this gift send
+                  default: User
+                  enum:
+                  - User
+                  - Team
+                team_name:
+                  type: string
+                  description: Specify which team wallet will be used as the payment wallet for this gift send. Set to the sender’s team name assigned to the team wallet. If empty, and payment_wallet_type is “Team”, it will be the sender’s default team by default.
+                confirm_address:
+                  type: boolean
+                  description: A confirmation email will be sent before the recipient can claim the gift
+                  default: true
+                bundle_handwritten_note:
+                  type: string
+                  description: Text that will appear on the handwritten note if you are sending a bundle campaign
+                packaging_notes:
+                  type: string
+                  description: Text that will appear on the handwritten note if you are sending a bundle campaign
+                custom_attributes:
+                  type: array
+                  description: List of custom attributes that can be used on campaign gift notes, options and gift emails. Add the name inside curly brackets when adding to campaigns (e.g. {{custom_gift_note}})
+                  items:
+                    properties:
+                      name:
+                        type: string
+                        description: Use underscores instead of spaces (e.g. custom_gift_note)
+                      value:
+                        type: string
+                        description: Value of the property (e.g. sent with love)
+                    type: object
+                send_method:
+                  type: string
+                  description: 'Delivery method. email (default) emails the gift to the recipient; link returns a shareable claim_url in the response instead of emailing. Allowed values: email, link.'
+                  enum:
+                  - email
+                  - link
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 55,\n  \"type\": \"gift_card\",\n  \"status\": \"processed\",\n\t\"payment_currency\": \"USD\",\n\t\"payment_wallet_id\": 1234,\n\t\"packaging_notes\": \"Handle with care\",\n\t\"custom_attributes\": [\n    {\n      \"name\": \"team\",\n\t\t\t\"value\": \"Polaris\"\n\t\t}\n  ],\n\t\"created_by_user\": {\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Doe\",\n    \"email\": \"jane.doe@reachdesk.com\"\n  },\n\t\"claim_url\": null,\n  \"recipient\": {\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"company_name\": \"Example Ltd.\",\n\t\t\"phone_number\": \"+1 123 123 123\",\n    \"street_address_1\": \"45 Rockefeller Plaza\",\n    \"street_address_2\": \"5th Floor\",\n    \"city\": \"New York\",\n    \"state\": \"NY\",\n    \"zipcode\": \"10111\",\n    \"country\": \"US\",\n\t\t\"tax_id\": \"123456789\"\n  },\n  \"sender\": {\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Doe\",\n    \"email\": \"jane.doe@reachdesk.com\"\n  },\n  \"gift_card\": {\n    \"amount\": 15.0,\n    \"currency\": \"USD\"\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 55
+                    default: 0
+                  type:
+                    type: string
+                    example: gift_card
+                  status:
+                    type: string
+                    example: processed
+                  payment_currency:
+                    type: string
+                    example: USD
+                  payment_wallet_id:
+                    type: integer
+                    example: 1234
+                    default: 0
+                  packaging_notes:
+                    type: string
+                    example: Handle with care
+                  custom_attributes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: team
+                        value:
+                          type: string
+                          example: Polaris
+                  created_by_user:
+                    type: object
+                    properties:
+                      first_name:
+                        type: string
+                        example: Jane
+                      last_name:
+                        type: string
+                        example: Doe
+                      email:
+                        type: string
+                        example: jane.doe@reachdesk.com
+                  claim_url: {}
+                  recipient:
+                    type: object
+                    properties:
+                      first_name:
+                        type: string
+                        example: John
+                      last_name:
+                        type: string
+                        example: Doe
+                      email:
+                        type: string
+                        example: john.doe@example.com
+                      company_name:
+                        type: string
+                        example: Example Ltd.
+                      phone_number:
+                        type: string
+                        example: +1 123 123 123
+                      street_address_1:
+                        type: string
+                        example: 45 Rockefeller Plaza
+                      street_address_2:
+                        type: string
+                        example: 5th Floor
+                      city:
+                        type: string
+                        example: New York
+                      state:
+                        type: string
+                        example: NY
+                      zipcode:
+                        type: string
+                        example: '10111'
+                      country:
+                        type: string
+                        example: US
+                      tax_id:
+                        type: string
+                        example: '123456789'
+                  sender:
+                    type: object
+                    properties:
+                      first_name:
+                        type: string
+                        example: Jane
+                      last_name:
+                        type: string
+                        example: Doe
+                      email:
+                        type: string
+                        example: jane.doe@reachdesk.com
+                  gift_card:
+                    type: object
+                    properties:
+                      amount:
+                        type: integer
+                        example: 15
+                        default: 0
+                      currency:
+                        type: string
+                        example: USD
+      deprecated: false
+      tags:
+      - Campaigns
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

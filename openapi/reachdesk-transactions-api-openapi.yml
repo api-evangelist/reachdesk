@@ -1,0 +1,197 @@
+openapi: 3.2.0
+info:
+  title: Reachdesk Transactions API
+  version: '1.0'
+servers:
+- url: https://app.reachdesk.com/api/v2
+security:
+- sec0: []
+tags:
+- name: Transactions
+paths:
+  /transactions:
+    get:
+      summary: List Transactions
+      description: Get a list of transactions within your organization.
+      operationId: list-transactions
+      parameters:
+      - name: start_date
+        in: query
+        description: Filter transactions created from start date
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        description: Filter transactions created until end date
+        schema:
+          type: string
+          format: date
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: transaction_types[]
+        in: query
+        description: 'Filter by transaction types. Available values: balance_allocation, balance_top_up, campaign_sends, contracted_free_credit, contracted_paid_credit, currency_conversion, free_credit, other, refund, sourced_items, upfront_balance_top_up, warehouse_sends, store_portal'
+        schema:
+          type: array
+          items:
+            type: string
+      - name: states[]
+        in: query
+        description: 'Filter by transaction state. Available values: cancelled, pending, processed.'
+        schema:
+          type: array
+          items:
+            type: string
+      - name: currencies[]
+        in: query
+        description: 'Filter by transaction currency. Use ISO 4217 (3-letter). Available values: AUD, CAD, DKK, EUR, GBP, INR, NOK, SEK, USD'
+        schema:
+          type: array
+          items:
+            type: string
+      - name: campaign_types[]
+        in: query
+        description: 'Filter by campaign types. Available values: bundle, gift_card, marketplace, note'
+        schema:
+          type: array
+          items:
+            type: string
+      - name: team_ids[]
+        in: query
+        description: Filter transactions by users within given teams.
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: user_ids[]
+        in: query
+        description: Filter transactions by the users associated.
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": [\n    {\n      \"id\": 137,\n      \"transaction_type\": \"other\",\n      \"state\": \"pending\",\n      \"currency\": \"EUR\",\n      \"amount\": -20,\n      \"send\": {\n        \"id\": 221,\n        \"recipient_email\": \"recipient@email.com\",\n        \"campaign_name\": \"Campaign name\",\n        \"team_name\": \"Team name\"\n      },\n      \"stock_shipment_order_number\": null,\n      \"merchandise_order_number\": null,\n      \"reference\": \"Campaign name\",\n      \"source_wallet_name\": \"Georgia people 918 EUR\",\n      \"destination_wallet_name\": null,\n      \"created_by\": {\n        \"name\": \"Margret Bechtelar\",\n        \"email\": \"lyla@larson.example\"\n      },\n      \"state_updated_at\": null,\n      \"created_at\": \"2023-09-13T18:14:10.000Z\",\n      \"updated_at\": \"2023-09-13T18:14:10.000Z\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 1,\n    \"per_page\": 200,\n    \"total_pages\": 1,\n    \"total_records\": 1\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 137
+                          default: 0
+                        transaction_type:
+                          type: string
+                          example: other
+                        state:
+                          type: string
+                          example: pending
+                        currency:
+                          type: string
+                          example: EUR
+                        amount:
+                          type: integer
+                          example: -20
+                          default: 0
+                        send:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 221
+                              default: 0
+                            recipient_email:
+                              type: string
+                              example: recipient@email.com
+                            campaign_name:
+                              type: string
+                              example: Campaign name
+                            team_name:
+                              type: string
+                              example: Team name
+                        stock_shipment_order_number: {}
+                        merchandise_order_number: {}
+                        reference:
+                          type: string
+                          example: Campaign name
+                        source_wallet_name:
+                          type: string
+                          example: Georgia people 918 EUR
+                        destination_wallet_name: {}
+                        created_by:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: Margret Bechtelar
+                            email:
+                              type: string
+                              example: lyla@larson.example
+                        state_updated_at: {}
+                        created_at:
+                          type: string
+                          example: '2023-09-13T18:14:10.000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-09-13T18:14:10.000Z'
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                        example: 1
+                        default: 0
+                      per_page:
+                        type: integer
+                        example: 200
+                        default: 0
+                      total_pages:
+                        type: integer
+                        example: 1
+                        default: 0
+                      total_records:
+                        type: integer
+                        example: 1
+                        default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Transactions
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

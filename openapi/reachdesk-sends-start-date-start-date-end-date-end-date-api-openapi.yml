@@ -1,0 +1,243 @@
+openapi: 3.2.0
+info:
+  title: Reachdesk Sends?start Date={start Date}&end Date={end Date} API
+  version: '1.0'
+servers:
+- url: https://app.reachdesk.com/api/v2
+security:
+- sec0: []
+tags:
+- name: Sends?start Date={start Date}&end Date={end Date}
+paths:
+  /sends?start_date={start_date}&end_date={end_date}:
+    get:
+      summary: List Sends
+      description: Get a list of Sends within your Organization
+      operationId: list-sends
+      parameters:
+      - name: start_date
+        in: query
+        description: 'Filter sends from the given date onwards. Format: YYYY-MM-DD (optional)'
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        description: 'Return sends created before the given date. Format: YYYY-MM-DD (optional)'
+        schema:
+          type: string
+          format: date
+      - name: page
+        in: query
+        description: Pagination value
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: per_page
+        in: query
+        description: number of results per page
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: start_updated_date
+        in: query
+        description: 'Filter sends from first update date (depends on end_updated_date). Format: YYYY-MM-DD (optional)'
+        schema:
+          type: string
+          format: date
+      - name: end_updated_date
+        in: query
+        description: 'Filter sends from the last update date (Depends on start_updated_date). Format: YYYY-MM-DD (optional)'
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": [\n    \n    {\n      \"id\": 4,\n      \"type\": \"bundle\",\n      \"email\": \"uilton.jose@gmail.com\",\n      \"status\": \"pending\",\n      \"latest_action\": null,\n      \"processed_at\": null,\n      \"created_at\": \"2025-08-06T16:56:11.364Z\",\n      \"gift_name\": null,\n      \"send_updated_date\": \"2025-08-06T16:56:11.364Z\",\n      \"campaign\": {\n        \"id\": 12,\n        \"name\": \"Badjurance\"\n      },\n      \"cost\": {\n        \"amount\": 3.73,\n        \"original_amount\": 3.0,\n        \"currency\": \"USD\",\n        \"original_currency\": \"GBP\",\n        \"display\": \"3.73 USD\",\n        \"original_display\": \"3.00 GBP\",\n        \"state\": \"estimated\"\n      },\n      \"team_name\": null,\n      \"order\": {\n        \"id\": 123,\n        \"order_number\": \"1234567890\",\n        \"status\": 350,\n        \"shipped_at\": \"2025-12-22T11:38:20.944Z\",\n        \"tracking_code\": \"1234567890\",\n        \"tracking_url\": \"https://www.google.com\",\n        \"shipment\": {\n          \"id\": 123,\n          \"provider_id\": 123,\n          \"provider_sub_status_message\": \"Sub status message\",\n          \"courier\": \"courier\",\n          \"tracking_number\": \"1234567890\",\n          \"tracking_url\": \"https://www.google.com\"\n        }\n      },\n      \"total_items_cost\": 100.0,\n      \"engage_items\": [\n        {\n          \"name\": \"My Cuppa\",\n          \"quantity\": 1\n        },\n        {\n          \"name\": \"Chocolate box\",\n          \"quantity\": 1\n        }\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"page\": 1,\n    \"per_page\": 25,\n    \"total_pages\": 1,\n    \"total_records\": 4\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 4
+                          default: 0
+                        type:
+                          type: string
+                          example: bundle
+                        email:
+                          type: string
+                          example: uilton.jose@gmail.com
+                        status:
+                          type: string
+                          example: pending
+                        latest_action: {}
+                        processed_at: {}
+                        created_at:
+                          type: string
+                          example: '2025-08-06T16:56:11.364Z'
+                        gift_name: {}
+                        send_updated_date:
+                          type: string
+                          example: '2025-08-06T16:56:11.364Z'
+                        campaign:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 12
+                              default: 0
+                            name:
+                              type: string
+                              example: Badjurance
+                        cost:
+                          type: object
+                          properties:
+                            amount:
+                              type: number
+                              example: 3.73
+                              default: 0
+                            original_amount:
+                              type: integer
+                              example: 3
+                              default: 0
+                            currency:
+                              type: string
+                              example: USD
+                            original_currency:
+                              type: string
+                              example: GBP
+                            display:
+                              type: string
+                              example: 3.73 USD
+                            original_display:
+                              type: string
+                              example: 3.00 GBP
+                            state:
+                              type: string
+                              example: estimated
+                        team_name: {}
+                        order:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 123
+                              default: 0
+                            order_number:
+                              type: string
+                              example: '1234567890'
+                            status:
+                              type: integer
+                              example: 350
+                              default: 0
+                            shipped_at:
+                              type: string
+                              example: '2025-12-22T11:38:20.944Z'
+                            tracking_code:
+                              type: string
+                              example: '1234567890'
+                            tracking_url:
+                              type: string
+                              example: https://www.google.com
+                            shipment:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  example: 123
+                                  default: 0
+                                provider_id:
+                                  type: integer
+                                  example: 123
+                                  default: 0
+                                provider_sub_status_message:
+                                  type: string
+                                  example: Sub status message
+                                courier:
+                                  type: string
+                                  example: courier
+                                tracking_number:
+                                  type: string
+                                  example: '1234567890'
+                                tracking_url:
+                                  type: string
+                                  example: https://www.google.com
+                        total_items_cost:
+                          type: integer
+                          example: 100
+                          default: 0
+                        engage_items:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                example: My Cuppa
+                              quantity:
+                                type: integer
+                                example: 1
+                                default: 0
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                        example: 1
+                        default: 0
+                      per_page:
+                        type: integer
+                        example: 25
+                        default: 0
+                      total_pages:
+                        type: integer
+                        example: 1
+                        default: 0
+                      total_records:
+                        type: integer
+                        example: 4
+                        default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: '401'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      tags:
+      - Sends?start Date={start Date}&end Date={end Date}
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

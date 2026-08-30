@@ -1,0 +1,117 @@
+openapi: 3.2.0
+info:
+  title: Reachdesk Gdpr API
+  version: '1.0'
+servers:
+- url: https://app.reachdesk.com/api/v2
+security:
+- sec0: []
+tags:
+- name: Gdpr
+paths:
+  /gdpr/requests:
+    post:
+      summary: Create GDPR Request
+      description: Create a GDPR Request for erasing or exporting subject data.
+      operationId: create-gdpr-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                request:
+                  type: object
+                  properties:
+                    request_type:
+                      type: string
+                      enum:
+                      - erase_subject
+                      - export_subject
+                    subject:
+                      type: string
+                      description: Email address of the subject
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 1,\n  \"request_type\": \"erase_subject\",\n  \"status\": \"pending\",\n  \"subject\": \"john.doe@mail.com\",\n  \"created_at\": \"2023-06-09T17:53\"\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                    default: 0
+                  request_type:
+                    type: string
+                    example: erase_subject
+                  status:
+                    type: string
+                    example: pending
+                  subject:
+                    type: string
+                    example: john.doe@mail.com
+                  created_at:
+                    type: string
+                    example: 2023-06-09T17:53
+      deprecated: false
+      tags:
+      - Gdpr
+  /gdpr/requests/{id}:
+    get:
+      summary: Get GDPR Request
+      description: Get the information and status about an existing GDPR Request (Coming Soon)
+      operationId: get-gdpr-request
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int32
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"id\": 1,\n  \"request_type\": \"erase_subject\",\n  \"status\": \"pending\",\n  \"subject\": \"john.doe@mail.com\",\n  \"created_at\": \"2023-06-09T17:53\"\n}"
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                    default: 0
+                  request_type:
+                    type: string
+                    example: erase_subject
+                  status:
+                    type: string
+                    example: pending
+                  subject:
+                    type: string
+                    example: john.doe@mail.com
+                  created_at:
+                    type: string
+                    example: 2023-06-09T17:53
+      deprecated: false
+      tags:
+      - Gdpr
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

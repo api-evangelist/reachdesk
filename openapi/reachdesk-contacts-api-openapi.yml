@@ -1,0 +1,119 @@
+openapi: 3.2.0
+info:
+  title: Reachdesk Contacts API
+  version: '1.0'
+servers:
+- url: https://app.reachdesk.com/api/v2
+security:
+- sec0: []
+tags:
+- name: Contacts
+paths:
+  /contacts:
+    get:
+      summary: List Contacts
+      description: Get a list of contacts within your organization.
+      operationId: list-contacts
+      parameters:
+      - name: account_name
+        in: query
+        description: Filter results by contact's company name
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"data\": [\n\t\t{\n\t\t\t\"id\": 86,\n\t\t\t\"name\": \"Ashley Eapen\",\n\t\t\t\"first_name\": \"Ashley\",\n\t\t\t\"last_name\": \"Eapen\",\n\t\t\t\"email\": \"ashley.eapen@reachdesk.com\",\n\t\t\t\"job_title\": \"Account Executive\",\n\t\t\t\"account_name\": \"Reachdesk\",\n\t\t\t\"country\": \"United States\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 80,\n\t\t\t\"name\": \"Bill Costello\",\n\t\t\t\"first_name\": \"Bill\",\n\t\t\t\"last_name\": \"Costello\",\n\t\t\t\"email\": \"billy.costello@reachdesk.com\",\n\t\t\t\"job_title\": \"Associate Account Executive\",\n\t\t\t\"account_name\": \"Reachdesk\",\n\t\t\t\"country\": \"United Kingdom\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 20,\n\t\t\t\"name\": \"Jeffrey Vanzant\",\n\t\t\t\"first_name\": \"Jeffrey\",\n\t\t\t\"last_name\": \"Vanzant\",\n\t\t\t\"email\": \"jeffrey.vanzant@reachdesk.com\",\n\t\t\t\"job_title\": \"Senior Manager, Revenue Operations\",\n\t\t\t\"account_name\": \"Reachdesk\",\n\t\t\t\"country\": \"Portugal\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 11,\n\t\t\t\"name\": \"Katherine Clementi\",\n\t\t\t\"first_name\": \"Katherine\",\n\t\t\t\"last_name\": \"Clementi\",\n\t\t\t\"email\": \"katherine.clementi@reachdesk.com\",\n\t\t\t\"job_title\": \"Customer Success Manager\",\n\t\t\t\"account_name\": \"reachdesk\",\n\t\t\t\"country\": \"Brazil\"\n\t\t}\n\t],\n\t\"pagination\": {\n\t\t\"page\": 1,\n\t\t\"per_page\": 25,\n\t\t\"total_pages\": 1,\n\t\t\"total_records\": 4\n\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 86
+                          default: 0
+                        name:
+                          type: string
+                          example: Ashley Eapen
+                        first_name:
+                          type: string
+                          example: Ashley
+                        last_name:
+                          type: string
+                          example: Eapen
+                        email:
+                          type: string
+                          example: ashley.eapen@reachdesk.com
+                        job_title:
+                          type: string
+                          example: Account Executive
+                        account_name:
+                          type: string
+                          example: Reachdesk
+                        country:
+                          type: string
+                          example: United States
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                        example: 1
+                        default: 0
+                      per_page:
+                        type: integer
+                        example: 25
+                        default: 0
+                      total_pages:
+                        type: integer
+                        example: 1
+                        default: 0
+                      total_records:
+                        type: integer
+                        example: 4
+                        default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Contacts
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true
