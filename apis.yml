@@ -162,6 +162,8 @@ apis:
   humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
   baseURL: https://app.reachdesk.com/api/v2
   tags:
+  - GDPR
+  tags_raw:
   - Gdpr
   properties:
   - type: OpenAPI
@@ -235,7 +237,8 @@ apis:
     date={start date}&end date={end date}.
   humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
   baseURL: https://app.reachdesk.com/api/v2
-  tags:
+  tags: []
+  tags_raw:
   - Sends?start Date={start Date}&end Date={end Date}
   properties:
   - type: OpenAPI
@@ -260,6 +263,8 @@ apis:
   humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
   baseURL: https://app.reachdesk.com/api/v2
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
