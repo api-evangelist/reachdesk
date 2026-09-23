@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Reachdesk Sends?start Date={start Date}&end Date={end Date} API
+  title: Reachdesk Sends?start Date={start Date}&end Date={end Date}…
   version: '1.0'
 servers:
 - url: https://app.reachdesk.com/api/v2

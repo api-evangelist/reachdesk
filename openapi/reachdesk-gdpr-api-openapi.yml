@@ -7,7 +7,7 @@ servers:
 security:
 - sec0: []
 tags:
-- name: Gdpr
+- name: GDPR
 paths:
   /gdpr/requests:
     post:
@@ -60,7 +60,7 @@ paths:
                     example: 2023-06-09T17:53
       deprecated: false
       tags:
-      - Gdpr
+      - GDPR
   /gdpr/requests/{id}:
     get:
       summary: Get GDPR Request
@@ -102,7 +102,7 @@ paths:
                     example: 2023-06-09T17:53
       deprecated: false
       tags:
-      - Gdpr
+      - GDPR
 components:
   securitySchemes:
     sec0:

@@ -12,7 +12,7 @@ paths:
   /bulk_sends:
     post:
       summary: Bulk Send
-      description: 'Trigger a gift send from a campaign to many recipients in a single request.  This is the bulk counterpart to Trigger Campaign. Instead of one recipient per call, you send a list of recipients and the request is processed asynchronously: the endpoint responds immediately with a bulk send `id`, and the individual gifts are created in the background. As with the single trigger, each gift is built from the campaign''s own configuration — you don''t send the gift-card amount, bundle items, note template, or marketplace product. You only provide the recipients and the sender; everything else comes from the campaign. It works for every campaign type (gift card, note, bundle, marketplace).'
+      description: 'Trigger a gift send from a campaign to many recipients in a single request. This is the bulk counterpart to Trigger Campaign. Instead of one recipient per call, you send a list of recipients and the request is processed asynchronously: the endpoint responds immediately with a bulk send `id`, and the individual gifts are created in the background. As with the single trigger, each gift is built from the campaign''s own configuration — you don''t send the gift-card amount, bundle items, note template, or marketplace product. You only provide the recipients and the sender; everything else comes from the campaign. It works for every campaign type (gift card, note, bundle, marketplace).'
       operationId: bulk-create
       requestBody:
         content:

@@ -1,0 +1,53 @@
+{
+  "provider": "reachdesk",
+  "sources": [
+    "_original/reachdesk-api-openapi.yml"
+  ],
+  "outputs": [
+    "reachdesk-bulk-sends-api-openapi.yml",
+    "reachdesk-campaigns-api-openapi.yml",
+    "reachdesk-contacts-api-openapi.yml",
+    "reachdesk-gdpr-api-openapi.yml",
+    "reachdesk-organization-api-openapi.yml",
+    "reachdesk-sends-api-openapi.yml",
+    "reachdesk-sends-start-date-start-date-end-date-end-date-api-openapi.yml",
+    "reachdesk-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "reachdesk-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "reachdesk-api-openapi.yml: tagged paths POST /campaigns/{id}/trigger -> Campaigns",
+    "reachdesk-api-openapi.yml: tagged paths GET /organization -> Organization",
+    "reachdesk-api-openapi.yml: tagged paths POST /gdpr/requests -> Gdpr",
+    "reachdesk-api-openapi.yml: tagged paths GET /gdpr/requests/{id} -> Gdpr",
+    "reachdesk-api-openapi.yml: tagged paths GET /contacts -> Contacts",
+    "reachdesk-api-openapi.yml: tagged paths GET /sends?start_date={start_date}&end_date={end_date} -> Sends?start Date={start Date}&end Date={end Date}",
+    "reachdesk-api-openapi.yml: tagged paths GET /transactions -> Transactions",
+    "reachdesk-api-openapi.yml: tagged paths GET /sends/{id} -> Sends",
+    "reachdesk-api-openapi.yml: tagged paths POST /bulk_sends -> Bulk Sends",
+    "reachdesk-api-openapi.yml: declared missing tag: Bulk Sends",
+    "reachdesk-api-openapi.yml: declared missing tag: Campaigns",
+    "reachdesk-api-openapi.yml: declared missing tag: Contacts",
+    "reachdesk-api-openapi.yml: declared missing tag: Gdpr",
+    "reachdesk-api-openapi.yml: declared missing tag: Organization",
+    "reachdesk-api-openapi.yml: declared missing tag: Sends",
+    "reachdesk-api-openapi.yml: declared missing tag: Sends?start Date={start Date}&end Date={end Date}",
+    "reachdesk-api-openapi.yml: declared missing tag: Transactions",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/reachdesk-openapi-original.json: archived document superseded by a larger archived document",
+    "reachdesk-bulk-sends-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reachdesk-campaigns-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reachdesk-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reachdesk-gdpr-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reachdesk-organization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reachdesk-sends-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reachdesk-sends-start-date-start-date-end-date-end-date-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reachdesk-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
