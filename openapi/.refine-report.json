@@ -10,10 +10,11 @@
     "reachdesk-gdpr-api-openapi.yml",
     "reachdesk-organization-api-openapi.yml",
     "reachdesk-sends-api-openapi.yml",
-    "reachdesk-sends-start-date-start-date-end-date-end-date-api-openapi.yml",
     "reachdesk-transactions-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -25,7 +26,7 @@
     "reachdesk-api-openapi.yml: tagged paths POST /gdpr/requests -> Gdpr",
     "reachdesk-api-openapi.yml: tagged paths GET /gdpr/requests/{id} -> Gdpr",
     "reachdesk-api-openapi.yml: tagged paths GET /contacts -> Contacts",
-    "reachdesk-api-openapi.yml: tagged paths GET /sends?start_date={start_date}&end_date={end_date} -> Sends?start Date={start Date}&end Date={end Date}",
+    "reachdesk-api-openapi.yml: tagged paths GET /sends?start_date={start_date}&end_date={end_date} -> Sends",
     "reachdesk-api-openapi.yml: tagged paths GET /transactions -> Transactions",
     "reachdesk-api-openapi.yml: tagged paths GET /sends/{id} -> Sends",
     "reachdesk-api-openapi.yml: tagged paths POST /bulk_sends -> Bulk Sends",
@@ -35,9 +36,9 @@
     "reachdesk-api-openapi.yml: declared missing tag: Gdpr",
     "reachdesk-api-openapi.yml: declared missing tag: Organization",
     "reachdesk-api-openapi.yml: declared missing tag: Sends",
-    "reachdesk-api-openapi.yml: declared missing tag: Sends?start Date={start Date}&end Date={end Date}",
     "reachdesk-api-openapi.yml: declared missing tag: Transactions",
-    "apis.yml register: already-registered"
+    "superseded outputs removed: reachdesk-sends-start-date-start-date-end-date-end-date-api-openapi.yml",
+    "apis.yml register: written (+0 apis, 8 total)"
   ],
   "skipped": [
     "_original/reachdesk-openapi-original.json: archived document superseded by a larger archived document",

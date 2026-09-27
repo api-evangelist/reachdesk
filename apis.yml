@@ -230,33 +230,6 @@ apis:
     url: conventions/reachdesk-conventions.yml
   - type: DataModel
     url: data-model/reachdesk-data-model.yml
-- aid: reachdesk:reachdesk-sends-start-date-start-date-end-date-end-date-api
-  name: Reachdesk Sends?start Date={start Date}&end Date={end Date} API
-  description: >-
-    The Sends?start Date={start Date}&end Date={end Date} API from Reachdesk — 1 operation(s) for sends?start
-    date={start date}&end date={end date}.
-  humanURL: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
-  baseURL: https://app.reachdesk.com/api/v2
-  tags: []
-  tags_raw:
-  - Sends?start Date={start Date}&end Date={end Date}
-  properties:
-  - type: OpenAPI
-    url: openapi/reachdesk-sends-start-date-start-date-end-date-end-date-api-openapi.yml
-  - type: Documentation
-    url: https://support.reachdesk.com/hc/en-gb/categories/4404901379473-Integrations-API
-  - type: APIReference
-    url: https://reachdesk.readme.io/reference/authentication
-  - type: APISection
-    url: https://support.reachdesk.com/hc/en-gb/sections/29669389953297-Reachdesk-API
-  - type: Authentication
-    url: authentication/reachdesk-authentication.yml
-  - type: ErrorCatalog
-    url: errors/reachdesk-problem-types.yml
-  - type: Conventions
-    url: conventions/reachdesk-conventions.yml
-  - type: DataModel
-    url: data-model/reachdesk-data-model.yml
 - aid: reachdesk:reachdesk-transactions-api
   name: Reachdesk Transactions API
   description: The Transactions API from Reachdesk — 1 operation(s) for transactions.
