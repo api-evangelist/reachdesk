@@ -257,6 +257,9 @@ apis:
   - type: DataModel
     url: data-model/reachdesk-data-model.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/reachdesk-capability-edges.yml
+    name: Reachdesk Business Capability Map
   - type: Authentication
     url: authentication/reachdesk-authentication.yml
   - type: DomainSecurity

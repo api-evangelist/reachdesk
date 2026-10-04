@@ -1,0 +1,25 @@
+slug: reachdesk
+provider: Reachdesk
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: GDPR
+  spec_file: reachdesk-gdpr-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.75
+  evidence: POST /gdpr/requests create-gdpr-request Create GDPR Request
+  reason: Explicit creation and retrieval of GDPR requests, i.e. data-subject rights handling under privacy
+    regulation. Unambiguous intent; only the exact sub-capability framing (general privacy vs vendor service-privacy
+    commitment) leaves residual doubt.
